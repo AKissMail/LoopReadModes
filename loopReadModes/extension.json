@@ -23,15 +23,29 @@
   },
 
 
-  "callback" : "LoopReadModes::onBeforePageDisplay",
+  "callback" : "LoopReadModes::onExtensionLoad",
+
   "AutoloadClasses": {
     "LoopReadModes": "includes/LoopReadModes.php"
   },
   "Hooks" :{
     "BeforePageDisplay" :
     [
-      "loopReadModes::onBeforePageDisplay"
+      "LoopReadModes::onBeforePageDisplay"
     ]
+  },
+  "ResourceModules": {
+    "extensions.loopReadModes": {
+      "styles": "resources/styles.css"
+    },
+    "extensions.loopReadModes.js": {
+      "position": "bottom",
+      "scripts": [
+        "resources/script.js"
+      ],
+      "messages": [
+      ]
+    }
   },
   "SpecialPages" : {},
 
