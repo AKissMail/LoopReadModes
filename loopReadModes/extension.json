@@ -1,0 +1,40 @@
+{
+  "name" : "LoopReadModes",
+  "namesg" : "loopreadmodes-extensionname",
+  "type" : "other",
+  "author" : [
+    "Andreas Kißmehl"
+  ],
+  "version" : "0.1.0",
+  "url": "https://github.com/AKissMail/mediawiki-skins-Loop-readmode",
+  "description" : "This extension makes Pages in Loop more accessible for users that have special needs",
+  "descriptionmsg" : "loopreadmodes-desc",
+  "license-name" : "GPL-3.0",
+  "requires" : {
+    "MediaWiki": ">= 1.35",
+    "extensions": {
+      "Loop": ">=2.1.0"
+    }
+  },
+  "MessagesDirs": {
+    "LoopReadModes": [
+      "i18n"
+    ]
+  },
+
+
+  "callback" : "LoopReadModes::onBeforePageDisplay",
+  "AutoloadClasses": {
+    "LoopReadModes": "includes/LoopReadModes.php"
+  },
+  "Hooks" :{
+    "BeforePageDisplay" :
+    [
+      "loopReadModes::onBeforePageDisplay"
+    ]
+  },
+  "SpecialPages" : {},
+
+
+  "manifest_version" : 2
+}
