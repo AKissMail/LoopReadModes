@@ -21,10 +21,7 @@
       "i18n"
     ]
   },
-
-
   "callback" : "LoopReadModes::onExtensionLoad",
-
   "AutoloadClasses": {
     "LoopReadModes": "includes/LoopReadModes.php"
   },
@@ -34,21 +31,24 @@
       "LoopReadModes::onBeforePageDisplay"
     ]
   },
+  "ResourceFileModulePaths": {
+		"localBasePath": ""
+	},
   "ResourceModules": {
-    "extensions.loopReadModes": {
-      "styles": "resources/styles.css"
+    "extension.LoopReadModes": {
+      "styles": "extensions/LoopReadModes/resources/css/loopReadModesMenu.css"
     },
-    "extensions.loopReadModes.js": {
+    "extension.LoopReadModes.js": {
       "position": "bottom",
       "scripts": [
-        "resources/script.js"
+		  "extensions/LoopReadModes/resources/js/init.js",
+		  "extension/LoopReadModes/resources/js/fetch.js",
+		  "extensions/LoopReadModes/resources/js/html.js"
       ],
       "messages": [
       ]
     }
   },
   "SpecialPages" : {},
-
-
   "manifest_version" : 2
 }
