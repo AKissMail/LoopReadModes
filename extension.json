@@ -36,14 +36,14 @@
 	},
   "ResourceModules": {
     "extension.LoopReadModes": {
-      "styles": "extensions/LoopReadModes/resources/css/loopReadModesMenu.css"
+      "styles": "/resources/css/loopReadModesMenu.css"
     },
     "extension.LoopReadModes.js": {
       "position": "bottom",
       "scripts": [
-		  "extensions/LoopReadModes/resources/js/init.js",
-		  "extension/LoopReadModes/resources/js/fetch.js",
-		  "extensions/LoopReadModes/resources/js/html.js"
+		  "/resources/js/init.js",
+		  "/resources/js/fetch.js",
+		  "/resources/js/html.js"
       ],
       "messages": [
       ]

@@ -1,6 +1,6 @@
 
-
-import {fetchStyles} from './fetch.js';
+/**
+//import {fetchStyles} from './fetch.js';
 
 
 export function build(cookie) {
@@ -14,3 +14,6 @@ export function build(cookie) {
 	// hier muss jetzt das was aus fetchStyles kommt hinzugefügt werden.
 
 }
+*/
+
+
