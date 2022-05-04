@@ -7,8 +7,7 @@
  * That is the first function how get called after the file is on the Client.
  */
 (()=>{
-	//document.cookie="test="+"123"
-	build(getCookie('loopReadModesStyle'));
+	fetchStyles();
 })();
 
 /**
@@ -34,19 +33,28 @@ function getCookie(cookieName) {
 }
 
 /**
- * @todo
- * @returns {string[]}
+ * This function set up the menubar and put it in the dom.
  */
-function fetchStyles() {
-	return ['red', 'blue','green','yellow'];
+function build(input) {
+	console.log(input);
+	console.log('build');
+	let barWrapper = document.createElement('div');
+	let typoScale = getScale();
+	let style = getSelect(input);
+	barWrapper.setAttribute('id','loopReadModesBar');
+	barWrapper.append(typoScale);
+	barWrapper.append(style);
+	document.getElementById('banner-logo-container').append(barWrapper);
 }
-
 /**
- *
- * @param input
- * @returns {undefined}
+ * This function set up a genuin select dropdown. It takes an array of strings as an input
+ * and put each element in the dropdown list.
+ * @param input an array of strings
+ * @returns {undefined} the dropdown as html
  */
-function getSelect(input, callback, id) {
+function getSelect(input) {
+	let div = document.createElement('div');
+	div.setAttribute('id', 'loopReadModesStyle');
 	let select = document.createElement('select');
 	input.forEach((item)=>{
 		let temp = document.createElement('option');
@@ -54,30 +62,56 @@ function getSelect(input, callback, id) {
 		temp.innerHTML = item;
 		select.append(temp);
 	})
-	return select;
+	div.append(select);
+	return div;
 }
 
 /**
- *
- * @param cookie
+ * This function fetch a json file from the Server and calls build.
+ * If nothing is in the JSON file or an Error happens it just calls build with ['LOOP'].
  */
-function build(cookie) {
-	let styles = fetchStyles();
-	let firstDiv = document.createElement('div');
-	let secondDiv = document.createElement('div');
-	let thirdDiv = document.createElement('div');
-	firstDiv.setAttribute('id','loopReadModesBar');
-	secondDiv.setAttribute('id', 'loopReadModesFont');
-	thirdDiv.setAttribute('id', 'loopReadModesStyle');
-	secondDiv.append(getSelect(styles, 'loopReadModesFont', 'loopReadModesFont'));
-	thirdDiv.append(getSelect(styles, 'loopReadModesFont', 'loopReadModesFont'));
-	firstDiv.append(secondDiv);
-	firstDiv.append(thirdDiv);
-
-	document.getElementsByTagName('header')[0].append(firstDiv);
-	// hier muss jetzt das was aus fetchStyles kommt hinzugefügt werden.
-
+function fetchStyles() {
+	console.log('fetchStyles');
+	fetch('../extensions/LoopReadModes/modes/modes.json')
+		.then(r =>{
+			r.json()
+				.then(r => {
+					console.log(r.StyleID);
+					if(r.StyleID.length === 0){
+						build(['LOOP']);
+					}else {
+						build(r.StyleID);
+					}
+				});
+		}).catch(err =>{
+		build(['LOOP']);
+		console.log('fetch failed!: ' + err.message);
+	});
 }
-function consoleprinterr(i) {
-	console.log(i);
+
+
+/**
+ * Diese function baut eine
+ * @returns {HTMLDivElement}
+ * @todo
+ */
+function getScale() {
+	let wrapper = 	document.createElement('div');
+	let smallText= 	document.createElement('div');
+	let normalText= document.createElement('div');
+	let largeText= 	document.createElement('div');
+	wrapper.setAttribute('id', 'loopReadModesFont');
+
+	smallText.setAttribute('id', 'smallText');
+
+	normalText.setAttribute('id','normalText');
+	largeText.setAttribute('id', 'largeText');
+	wrapper.append(smallText);
+	wrapper.append(normalText);
+	wrapper.append(largeText);
+	return wrapper;
 }
+
+
+
+
