@@ -1,11 +1,17 @@
 {
-    "StyleID": [],
-    "LRS":{
-        "styleURL": ""
-    }, 
-    "Black":{
-        "styleURL": ""
-    }
-  }
-
-  
+    "StyleID": ["LOOP","LRS", "DARKMODE"], 
+    "Style" : [
+        {
+            "name": "LOOP",
+            "url": ""
+        },
+        {
+            "name": "LRS",
+            "url": "../extensions/LoopReadModes/modes/css/lrs.css"
+        },
+        {
+            "name": "DARKMODE",
+            "url": "../extensions/LoopReadModes/modes/css/darkmode.css"
+        }
+    ]
+}

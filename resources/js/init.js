@@ -2,14 +2,9 @@
  * This file is contains to function how get called when the script is loaded in the client.
  * @author Andreas Kißmehl
  */
-//import {build} from "./html";
-/**
- * That is the first function how get called after the file is on the Client.
- */
-(()=>{
-	fetchStyles();
-})();
-
+let config;
+let styleURL;
+const configURL= "../extensions/LoopReadModes/modes/modes.json";
 /**
  * That function checks if a Cookie is already set with a preferred style and return that name of the style.
  * If the function fond nothing the sting 'default' is returned.
@@ -29,7 +24,7 @@ function getCookie(cookieName) {
 			return returnValue.substring(name.length, returnValue.length);
 		}
 	}
-	return "default";
+	return "LOOP";
 }
 
 /**
@@ -40,11 +35,12 @@ function build(input) {
 	console.log('build');
 	let barWrapper = document.createElement('div');
 	let typoScale = getScale();
-	let style = getSelect(input);
+	let style = getSelect(input.StyleID);
 	barWrapper.setAttribute('id','loopReadModesBar');
 	barWrapper.append(typoScale);
 	barWrapper.append(style);
 	document.getElementById('banner-logo-container').append(barWrapper);
+	addListener();
 }
 /**
  * This function set up a genuin select dropdown. It takes an array of strings as an input
@@ -56,6 +52,7 @@ function getSelect(input) {
 	let div = document.createElement('div');
 	div.setAttribute('id', 'loopReadModesStyle');
 	let select = document.createElement('select');
+	select.setAttribute('id', 'loopReadModesStyleSelect')
 	input.forEach((item)=>{
 		let temp = document.createElement('option');
 		temp.setAttribute('value', item);
@@ -70,9 +67,8 @@ function getSelect(input) {
  * This function fetch a json file from the Server and calls build.
  * If nothing is in the JSON file or an Error happens it just calls build with ['LOOP'].
  */
-function fetchStyles() {
-	console.log('fetchStyles');
-	fetch('../extensions/LoopReadModes/modes/modes.json')
+ function fetchStyles() {
+	fetch(configURL)
 		.then(r =>{
 			r.json()
 				.then(r => {
@@ -80,7 +76,8 @@ function fetchStyles() {
 					if(r.StyleID.length === 0){
 						build(['LOOP']);
 					}else {
-						build(r.StyleID);
+						config =r;
+						build(r);
 					}
 				});
 		}).catch(err =>{
@@ -89,21 +86,18 @@ function fetchStyles() {
 	});
 }
 
-
 /**
- * Diese function baut eine
+ * Darus soll mal eine auswahl zu der größe von der Schrift werden.
  * @returns {HTMLDivElement}
  * @todo
  */
 function getScale() {
-	let wrapper = 	document.createElement('div');
-	let smallText= 	document.createElement('div');
-	let normalText= document.createElement('div');
-	let largeText= 	document.createElement('div');
+	let wrapper = 	 document.createElement('div');
+	let smallText =  document.createElement('div');
+	let normalText = document.createElement('div');
+	let largeText =  document.createElement('div');
 	wrapper.setAttribute('id', 'loopReadModesFont');
-
 	smallText.setAttribute('id', 'smallText');
-
 	normalText.setAttribute('id','normalText');
 	largeText.setAttribute('id', 'largeText');
 	wrapper.append(smallText);
@@ -112,6 +106,49 @@ function getScale() {
 	return wrapper;
 }
 
+/**
+ * @todo
+ * Hier soll ein neues Stylesheet eingehängt werden...
+ * @returns {undefined}
+ */
+function updateStyle(style) {
+	config.Style.forEach(temp=>{
+		if(style === temp.name){
+			console.log(temp.url);
+			styleURL = temp.url;
+			let stylesheet = document.createElement('link');
+			stylesheet.setAttribute('rel', 'stylesheet');
+			stylesheet.setAttribute('type', "text/css");
+			stylesheet.setAttribute('href', styleURL);
+			stylesheet.setAttribute('id', 'LoopReadModesStyleSheet');
+			if(!!document.getElementById('LoopReadModesStyleSheet')) {
+				document.getElementById('LoopReadModesStyleSheet').remove();
+			}
+			document.getElementsByTagName('head')[0].append(stylesheet);
+		}
+	});
+
+}
+
+/**
+ * @todo
+ * Hier werden die Listener gesetzt.
+ */
+function addListener(c) {
+ 	//console.log(config.LRS.styleURL);
+	let styles = document.getElementById('loopReadModesStyleSelect');
+ 	styles.onchange= (event)=>{
+		let dropdownValue = styles.value.toString();
+	 	console.log(dropdownValue);
+		 updateStyle(dropdownValue);
+ 	};
+	 // @todo hier muss noch der Listener für die Skalierung hin.
+}
 
 
-
+/**
+ * That is the first function how get called after the file is on the Client.
+ */
+(()=>{
+	fetchStyles();
+})();

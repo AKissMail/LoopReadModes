@@ -4,7 +4,7 @@
 
 
 export function build(cookie) {
-	let styles = fetchStyles();
+	let config = fetchStyles();
 	let firstDiv = document.createElement('div');
 	let secondDiv = document.createElement('div');
 	let thirdDiv = document.createElement('div');
