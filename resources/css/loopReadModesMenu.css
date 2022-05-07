@@ -17,3 +17,35 @@
 	-webkit-appearance: button;
 	outline: none;
 }
+#loopReadModesFont {
+	margin-left: 10px;
+	margin-right: 10px;
+	padding: 8px;
+	background-color: #fff;
+	display: flex;
+	justify-content:center;
+}
+#smallText {
+	width:10px;
+	height: 10px;
+	background-color: #d00c0c;
+}
+#normalText {
+	width:10px;
+	height: 10px;
+	background-color: #35d212;
+}
+#largeText {
+	width:10px;
+	height: 10px;
+	background-color: #e0640c;
+}
+.smallText{
+ font-size: 14px;
+}
+.normalText{
+ font-size:16px;
+}
+.largeText{
+ font-size: 260px;
+}
