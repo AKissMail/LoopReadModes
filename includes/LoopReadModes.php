@@ -4,7 +4,7 @@
  * @author Andreas Kißmehl
  */
 
-/* Check ob ein MediaWiki vohanden ist oder */
+/* Check ob ein MediaWiki vorhanden ist oder */
 if ( !defined( 'MEDIAWIKI' ) ) die ( "This file cannot be run standalone.\n" );
 
 /**

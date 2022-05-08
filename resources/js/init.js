@@ -1,19 +1,18 @@
 /**
- * This file is contains to function how get called when the script is loaded in the client.
  * @author Andreas Kißmehl
  */
 let config; 	// Global variable for the Config object after it is fetched from the Server.
 let styleURL;	// The URI of the current Stylesheet
-let textSize = 16;
+let currentStyle = getCookie("style");
+let textSize = getCookie("textSize");
 const configURL= "../extensions/LoopReadModes/modes/modes.json"; // URI of the Configfile.
+
 /**
  * That function checks if a Cookie is already set with a preferred style and return that name of the style.
- * If the function fond nothing the sting 'default' is returned.
+ * If the function fond nothing the sting '' is returned.
  * @returns {string} the name of the style
- * @todo put in place
  */
 function getCookie(cookieName) {
-	console.log("test");
 	let name = cookieName + "=";
 	let cookieArray = decodeURIComponent(document.cookie);
 	let cookieArraySplit = cookieArray.split(';');
@@ -26,39 +25,42 @@ function getCookie(cookieName) {
 			return returnValue.substring(name.length, returnValue.length);
 		}
 	}
-	return "LOOP";
+	return "";
 }
 
 /**
  * This function set up the menubar and put it in the dom.
  */
 function build(input) {
-	console.log(input);
-	console.log('build');
-	let barWrapper = document.createElement('div');
+	let barWrapper = elementWithOneAttributes('div', 'id','loopReadModesBar');
 	let typoScale = getScale();
 	let style = getSelect(input.StyleID);
-	barWrapper.setAttribute('id','loopReadModesBar');
 	barWrapper.append(typoScale);
 	barWrapper.append(style);
 	document.getElementById('banner-logo-container').append(barWrapper);
+
 	addListener();
+	if(currentStyle){
+		updateStyle(currentStyle);
+	}
+	if(textSize){
+		changeP(textSize);
+	}else{
+		textSize = 16;
+	}
 }
+
 /**
  * This function set up a genuin select dropdown. It takes an array of strings as an input
  * and put each element in the dropdown list.
  * @param input an array of strings
  * @returns {undefined} the dropdown as html
- * @todo check auf Barrierefreiheit
  */
 function getSelect(input) {
-	let div = document.createElement('div');
-	div.setAttribute('id', 'loopReadModesStyle');
-	let select = document.createElement('select');
-	select.setAttribute('id', 'loopReadModesStyleSelect')
+	let div = elementWithOneAttributes('div','id','loopReadModesStyle' );
+	let select = elementWithOneAttributes('select','id','loopReadModesStyleSelect' );
 	input.forEach((item)=>{
-		let temp = document.createElement('option');
-		temp.setAttribute('value', item);
+		let temp = elementWithOneAttributes('option', 'value',item);
 		temp.innerHTML = item;
 		select.append(temp);
 	})
@@ -76,7 +78,6 @@ function getSelect(input) {
 		.then(r =>{
 			r.json()
 				.then(r => {
-					console.log(r.StyleID);
 					if(r.StyleID.length === 0){
 						build(['LOOP']);
 					}else {
@@ -91,19 +92,22 @@ function getSelect(input) {
 }
 
 /**
- * Darus soll mal eine auswahl zu der größe von der Schrift werden.
+ * This function creates the buttons for adjusting the text size.
  * @returns {HTMLDivElement}
- * @todo update das Icons angezeigt werden und Text labels gesetzt werden
  */
 function getScale() {
-	let wrapper = 	 document.createElement('div');
-	let smallText =  document.createElement('div');
-	let normalText = document.createElement('div');
-	let largeText =  document.createElement('div');
-	wrapper.setAttribute('id', 'loopReadModesFont');
-	smallText.setAttribute('id', 'smallText');
-	normalText.setAttribute('id','normalText');
-	largeText.setAttribute('id', 'largeText');
+	let wrapper 	= elementWithOneAttributes('div', 'id', 'loopReadModesFont');
+	let smallText 	= elementWithOneAttributes('button', 'id', 'smallText');
+	let normalText 	= elementWithOneAttributes('button', 'id', 'normalText');
+	let largeText 	= elementWithOneAttributes('button', 'id', 'largeText');
+	let iconSmall 	= elementWithTowAttributes('img', 'src', config.smallIcon, 'alt', 'Text Verkleinern');
+	let iconNormal 	= elementWithTowAttributes('img', 'src', config.normalIcon, 'alt', 'Normale Textgröße');
+	let iconLarge 	= elementWithTowAttributes('img', 'src', config.lageIcon, 'alt', 'Text Vergrößern');
+
+	smallText.append(iconSmall);
+	normalText.append(iconNormal);
+	largeText.append(iconLarge);
+
 	wrapper.append(smallText);
 	wrapper.append(normalText);
 	wrapper.append(largeText);
@@ -111,15 +115,24 @@ function getScale() {
 }
 
 /**
+ * This functon set the select dropdown to the activ style if it is read out of a cookie.
+ * @param style the name of the active style
+ */
+function setSelect(style) {
+	let select = document.getElementById('loopReadModesStyleSelect');
+	select.value=style;
+}
+
+/**
  * This function takes a Keyword and checks if the keyword appears in the config variable.
  * If so it takes the URL out of the config variable and creates link tag with the URL.
  * Before the tag is put in the DOM, it checkt if a custom Style is already in the DOM and remove it.
  * For this reason the id 'LoopReadModesStyleSheet' is used.
+ * @param style the chosen style
  */
 function updateStyle(style) {
 	config.Style.forEach(temp=>{
 		if(style === temp.name){
-			console.log(temp.url);
 			styleURL = temp.url;
 			let stylesheet = document.createElement('link');
 			stylesheet.setAttribute('rel', 'stylesheet');
@@ -130,6 +143,8 @@ function updateStyle(style) {
 				document.getElementById('LoopReadModesStyleSheet').remove();
 			}
 			document.getElementsByTagName('head')[0].append(stylesheet);
+			document.cookie = "style="+ style;
+			setSelect(style);
 		}
 	});
 
@@ -141,8 +156,9 @@ function updateStyle(style) {
  */
 function changeP(pSize) {
 	let pElement = document.getElementsByTagName('p');
-	for (let i=0;i <= pElement.length;i++) {
+	for (let i=0;i < pElement.length;i++) {
 		pElement[i].setAttribute('style', 'font-size:'+pSize+'px;')
+		document.cookie="textSize="+pSize;
 	}
 }
 
@@ -156,7 +172,7 @@ function addListener() {
  	};
 	let smallText = document.getElementById('smallText');
 	smallText.onclick = (event) =>{
-		textSize= textSize-1;
+		textSize--;
 		changeP(textSize);
 	}
 	let normalText = document.getElementById('normalText');
@@ -166,11 +182,39 @@ function addListener() {
 	}
 	let largeText = document.getElementById('largeText');
 	largeText.onclick = (event) =>{
-		textSize = textSize+1;
+		textSize++;
 		changeP(textSize);
 	}
 }
 
+/**
+ * This function creates a dom element with two attributes and values.
+ * @param tag the kind of the tag
+ * @param attribut1 name of the first attribut
+ * @param value1 value of the first attribut
+ * @param attribut2 name of the second attribut
+ * @param value2 value of the second attribut
+ * @returns {*} the dom element
+ */
+function elementWithTowAttributes(tag, attribut1, value1, attribut2, value2){
+	let t = document.createElement(tag);
+	t.setAttribute(attribut1, value1);
+	t.setAttribute(attribut2, value2);
+	return t;
+}
+
+/**
+ * This function creates a dom element with one attributes and values.
+ * @param tag the kind of the tag
+ * @param attribut name of the attribut
+ * @param value value of the attribut
+ * @returns {*} the dom element
+ */
+function  elementWithOneAttributes(tag, attribut, value,){
+	let t = document.createElement(tag);
+	t.setAttribute(attribut, value);
+	return t;
+}
 
 /**
  * That is the first function how get called after the file is on the Client.

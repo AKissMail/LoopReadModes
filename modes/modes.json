@@ -1,5 +1,5 @@
 {
-    "StyleID": ["LOOP","LRS", "DARKMODE"], 
+    "StyleID": ["LOOP","LRS", "DARK MODE"],
     "Style" : [
         {
             "name": "LOOP",
@@ -10,8 +10,13 @@
             "url": "../extensions/LoopReadModes/modes/css/lrs.css"
         },
         {
-            "name": "DARKMODE",
-            "url": "../extensions/LoopReadModes/modes/css/darkmode.css"
+            "name": "DARK MODE",
+            "url": "../extensions/LoopReadModes/modes/css/dark-mode.css"
         }
-    ]
+    ],
+	"smallIcon" : 	"../extensions/LoopReadModes/resources/img/text-.svg",
+	"normalIcon": 	"../extensions/LoopReadModes/resources/img/texto.svg",
+	"lageIcon": 	"../extensions/LoopReadModes/resources/img/text+.svg"
+
+
 }
