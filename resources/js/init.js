@@ -141,7 +141,7 @@ function updateStyle(style) {
 				document.getElementById('LoopReadModesStyleSheet').remove();
 			}
 			document.getElementsByTagName('head')[0].append(stylesheet);
-			document.cookie = "style="+ style;
+			document.cookie = "style="+ style+"; SameSite=None; Secure";
 			setSelect(style);
 		}
 	});
@@ -156,7 +156,7 @@ function changeP(pSize) {
 	let pElement = document.getElementsByTagName('p');
 	for (let i=0;i < pElement.length;i++) {
 		pElement[i].setAttribute('style', 'font-size:'+pSize+'px;')
-		document.cookie="textSize="+pSize;
+		document.cookie="textSize="+pSize +"; SameSite=None; Secure";
 	}
 }
 
