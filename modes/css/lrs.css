@@ -1,9 +1,13 @@
 :root{
+	--main-bg-color: #EDD1B0;
+	--main-bg-secondary-color: #b48c79;
+	--main-height: 45px;
 	--background-color: #EDD1B0;
 	--background-color-secondary: #b48c79;
 	--border-top-color: black;
 	--typo-color: black;
 	--typo-color-link: black;
+	--iconColor:#000000!important;
 }
 /*Color*/
 body , #page-content, #content-inner-wrapper, .form-control{
@@ -24,13 +28,65 @@ body , #page-content, #content-inner-wrapper, .form-control{
 	box-shadow: 0 5px 5px -4px var(--border-top-color) !important;
 }
 /* Buttons */
-.btn-light.disabled, .btn-light[disabled], fieldset[disabled] .btn-light{}
+.btn-light.disabled, .btn-light[disabled], fieldset[disabled] .btn-light, .btn, .btn-light ,.page-nav-btn{
+	background-color: var(--background-color-secondary)!important;
+}
+#user-menu-dropdown{
+	background-color:#f8f9fa!important;
+}
 
 /* Typo */
-h1, h2, h3, h4, h5, h6, p, .form-control::placeholder, .panel-title,.btn {
+h1, h2, h3, h4, h5, h6, p, .form-control::placeholder, .panel-title,.btn, .page-symbol {
 	color: var(--typo-color)!important;
 }
 a, #main-footer{
 	color: var(--typo-color-link)!important;
 	text-decoration: underline !important;
+}
+#smallText, #normalText, #largeText{
+	color: var(--iconColor)!important;
+	font-size: 25px;
+}
+p{
+	letter-spacing: 2px;
+	line-height:1.4em;
+}
+
+/**/
+#loopReadModesBar{
+	background:var(--main-bg-color);
+	width:100%;
+	height:var(--main-height);
+	display:flex;
+	justify-content:flex-end
+}
+
+#loopReadModesBar >div > select {
+	background-color: var(--main-bg-color);
+	height: var(--main-height);
+	color: #000000;
+	font-size: 25px;
+	border: none;
+	-webkit-appearance: button;
+	outline: none;
+}
+#loopReadModesBar >div > select:hover, #loopReadModesBar >div > select:focus {
+	background-color: var(--main-bg-secondary-color);
+}
+
+#loopReadModesFont {
+	display: flex;
+	justify-content:center;
+}
+#loopReadModesFont > button {
+	background-color: var(--main-bg-color);;
+	border: none;
+	width:	var(--main-height);
+	height: var(--main-height);
+}
+#loopReadModesFont > button:hover,#loopReadModesFont > button:focus  {
+	background-color: var(--main-bg-secondary-color);
+}
+#Ebene_1{
+	color: #000000 !important;
 }

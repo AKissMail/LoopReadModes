@@ -30,4 +30,8 @@ class LoopReadModes
     {
 		$out->addModules( ['extension.LoopReadModes.js', 'extension.LoopReadModes']);
     }
+	public static function onSpecialSearchResultsAppend($specialSearch, $output, $term)
+	{
+		$output->addModules( ['extension.LoopReadModes.js', 'extension.LoopReadModes']);
+	}
 }

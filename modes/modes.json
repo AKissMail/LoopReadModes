@@ -7,16 +7,11 @@
         },
         {
             "name": "LRS",
-            "url": "../extensions/LoopReadModes/modes/css/lrs.css"
+            "url": "./extensions/LoopReadModes/modes/css/lrs.css"
         },
         {
             "name": "DARK MODE",
-            "url": "../extensions/LoopReadModes/modes/css/dark-mode.css"
+            "url": "./extensions/LoopReadModes/modes/css/dark-mode.css"
         }
-    ],
-	"smallIcon" : 	"../extensions/LoopReadModes/resources/img/text-.svg",
-	"normalIcon": 	"../extensions/LoopReadModes/resources/img/texto.svg",
-	"lageIcon": 	"../extensions/LoopReadModes/resources/img/text+.svg"
-
-
+    ]
 }

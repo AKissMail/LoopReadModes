@@ -2,6 +2,7 @@
 	--main-bg-color: #526ca2;
 	--main-bg-secondary-color: #7d9df1;
 	--main-height: 45px;
+	--iconColor: #fff;
 }
 #loopReadModesBar{
 	background:var(--main-bg-color);
@@ -27,6 +28,7 @@
 #loopReadModesFont {
 	display: flex;
 	justify-content:center;
+
 }
 #loopReadModesFont > button {
 	background-color: var(--main-bg-color);;
@@ -36,4 +38,8 @@
 }
 #loopReadModesFont > button:hover,#loopReadModesFont > button:focus  {
 	background-color: var(--main-bg-secondary-color);
+}
+#smallText, #normalText, #largeText{
+	color: #fff;
+	font-size: 25px;
 }

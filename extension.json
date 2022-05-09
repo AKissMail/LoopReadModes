@@ -29,7 +29,11 @@
     "BeforePageDisplay" :
     [
       "LoopReadModes::onBeforePageDisplay"
-    ]
+    ],
+	"SpecialSearchResultsAppend":
+	[
+		"LoopReadModes::onSpecialSearchResultsAppend"
+	]
   },
   "ResourceFileModulePaths": {
 		"localBasePath": ""

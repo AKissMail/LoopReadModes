@@ -5,7 +5,9 @@ let config; 	// Global variable for the Config object after it is fetched from t
 let styleURL;	// The URI of the current Stylesheet
 let currentStyle = getCookie("style");
 let textSize = getCookie("textSize");
+let search = false;
 const configURL= "../extensions/LoopReadModes/modes/modes.json"; // URI of the Configfile.
+const altConfigURL = "./extensions/LoopReadModes/modes/modes.json";
 
 /**
  * That function checks if a Cookie is already set with a preferred style and return that name of the style.
@@ -73,8 +75,9 @@ function getSelect(input) {
  * If the JSON file is empty or an Error happens it just calls build() with ['LOOP'] and the bar with it scaling
  * functionality is build.
  */
- function fetchStyles() {
-	fetch(configURL)
+ function fetchStyles(url) {
+
+	fetch(url)
 		.then(r =>{
 			r.json()
 				.then(r => {
@@ -85,10 +88,7 @@ function getSelect(input) {
 						build(r);
 					}
 				});
-		}).catch(err =>{
-		build(['LOOP']);
-		console.log('fetch failed!: ' + err.message);
-	});
+		});
 }
 
 /**
@@ -100,14 +100,9 @@ function getScale() {
 	let smallText 	= elementWithOneAttributes('button', 'id', 'smallText');
 	let normalText 	= elementWithOneAttributes('button', 'id', 'normalText');
 	let largeText 	= elementWithOneAttributes('button', 'id', 'largeText');
-	let iconSmall 	= elementWithTowAttributes('img', 'src', config.smallIcon, 'alt', 'Text Verkleinern');
-	let iconNormal 	= elementWithTowAttributes('img', 'src', config.normalIcon, 'alt', 'Normale Textgröße');
-	let iconLarge 	= elementWithTowAttributes('img', 'src', config.lageIcon, 'alt', 'Text Vergrößern');
-
-	smallText.append(iconSmall);
-	normalText.append(iconNormal);
-	largeText.append(iconLarge);
-
+	smallText.innerHTML = 'A-';
+	normalText.innerHTML = 'A';
+	largeText.innerHTML = 'A+';
 	wrapper.append(smallText);
 	wrapper.append(normalText);
 	wrapper.append(largeText);
@@ -134,6 +129,9 @@ function updateStyle(style) {
 	config.Style.forEach(temp=>{
 		if(style === temp.name){
 			styleURL = temp.url;
+			if(!search){
+				styleURL = '.'+styleURL;
+			}
 			let stylesheet = document.createElement('link');
 			stylesheet.setAttribute('rel', 'stylesheet');
 			stylesheet.setAttribute('type', "text/css");
@@ -188,22 +186,6 @@ function addListener() {
 }
 
 /**
- * This function creates a dom element with two attributes and values.
- * @param tag the kind of the tag
- * @param attribut1 name of the first attribut
- * @param value1 value of the first attribut
- * @param attribut2 name of the second attribut
- * @param value2 value of the second attribut
- * @returns {*} the dom element
- */
-function elementWithTowAttributes(tag, attribut1, value1, attribut2, value2){
-	let t = document.createElement(tag);
-	t.setAttribute(attribut1, value1);
-	t.setAttribute(attribut2, value2);
-	return t;
-}
-
-/**
  * This function creates a dom element with one attributes and values.
  * @param tag the kind of the tag
  * @param attribut name of the attribut
@@ -220,5 +202,10 @@ function  elementWithOneAttributes(tag, attribut, value,){
  * That is the first function how get called after the file is on the Client.
  */
 (()=>{
-	fetchStyles();
+	if(!window.location.href.split('?')[1]){
+		fetchStyles(configURL);}
+	else {
+		search = true;
+		fetchStyles(altConfigURL);
+	}
 })();
