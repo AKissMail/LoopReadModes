@@ -1,6 +1,36 @@
-body{
-	background: red !important;
+:root{
+	--background-color: #EDD1B0;
+	--background-color-secondary: #b48c79;
+	--border-top-color: black;
+	--typo-color: black;
+	--typo-color-link: black;
 }
-#page-content {
-	background-color: red !important;
+/*Color*/
+body , #page-content, #content-inner-wrapper, .form-control{
+	background:var(--background-color)!important;
+}
+.panel-wrapper, #main-footer, #page-navigation-wrapper{
+	background-color: var(--background-color-secondary)!important;
+}
+#sidebar-wrapper .panel-heading, #export-panel .panel-heading{
+	border-top: 3px solid var(--border-top-color)!important;
+}
+.toc-tree li a::after{
+	background:none!important;
+}
+#toc-nav {
+	-webkit-box-shadow: 0 5px 5px -4px var(--border-top-color) !important;
+	-moz-box-shadow: 0 5px 5px -4px var(--border-top-color) !important;
+	box-shadow: 0 5px 5px -4px var(--border-top-color) !important;
+}
+/* Buttons */
+.btn-light.disabled, .btn-light[disabled], fieldset[disabled] .btn-light{}
+
+/* Typo */
+h1, h2, h3, h4, h5, h6, p, .form-control::placeholder, .panel-title,.btn {
+	color: var(--typo-color)!important;
+}
+a, #main-footer{
+	color: var(--typo-color-link)!important;
+	text-decoration: underline !important;
 }
