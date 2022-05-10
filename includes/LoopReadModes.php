@@ -1,7 +1,8 @@
 <?php
 /**
- * @description Diese Datei stellt eine
+ * @description This fiel is the base for the LoopReadModes Extension. It is a
  * @author Andreas Kißmehl
+ * @version
  */
 
 /* Check ob ein MediaWiki vorhanden ist oder */

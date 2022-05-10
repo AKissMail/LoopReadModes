@@ -1,13 +1,12 @@
 /**
  * @author Andreas Kißmehl
  */
-let config; 	// Global variable for the Config object after it is fetched from the Server.
-let styleURL;	// The URI of the current Stylesheet
-let currentStyle = getCookie("style");
-let textSize = getCookie("textSize");
-let search = false;
-const configURL= "../extensions/LoopReadModes/modes/modes.json"; // URI of the Configfile.
-const altConfigURL = "./extensions/LoopReadModes/modes/modes.json";
+let config; 										// Global variable for the Config object after it is fetched from the Server.
+let styleURL;										// The URI of the current Stylesheet
+let currentStyle = getCookie("style");	// the Current Style.
+let textSize = getCookie("textSize");	// The current TextSize
+let search = false; 								// boolean to determined wich hook is use. true = onSpecialSearchResultsAppend; false = onBeforePageDisplay;
+const configURL= "./extensions/LoopReadModes/modes/modes.json"; // URI of the Configuration file.
 
 /**
  * That function checks if a Cookie is already set with a preferred style and return that name of the style.
@@ -93,7 +92,7 @@ function getSelect(input) {
 
 /**
  * This function creates the buttons for adjusting the text size.
- * @returns {HTMLDivElement}
+ * @returns An Div with the three Buttons.
  */
 function getScale() {
 	let wrapper 	= elementWithOneAttributes('div', 'id', 'loopReadModesFont');
@@ -203,9 +202,10 @@ function  elementWithOneAttributes(tag, attribut, value,){
  */
 (()=>{
 	if(!window.location.href.split('?')[1]){
-		fetchStyles(configURL);}
+		search = false;
+		fetchStyles('.'+configURL);}
 	else {
 		search = true;
-		fetchStyles(altConfigURL);
+		fetchStyles(configURL);
 	}
 })();
