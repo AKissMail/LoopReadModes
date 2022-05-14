@@ -61,7 +61,7 @@ function getSelect(input) {
 	let div = elementWithOneAttributes('div','id','loopReadModesStyle' );
 	let select = elementWithOneAttributes('select','id','loopReadModesStyleSelect' );
 	input.forEach((item)=>{
-		let temp = elementWithOneAttributes('option', 'value',item);
+		let temp = elementWithTowAttributes('option', 'value',item, 'label', item);
 		temp.innerHTML = item;
 		select.append(temp);
 	})
@@ -148,14 +148,40 @@ function updateStyle(style) {
 }
 
 /**
- * This function change the font-size of all p tags to a given px number.
- * @param pSize the px size of the p.
+ * This function change the font-size of all p, li, th and td tags to a given px number.
+ * The given number is saved in a cookie called 'textSize'.
+ * @param pSize the px size of the p, li, th and td.
  */
 function changeP(pSize) {
+	document.cookie="textSize="+pSize +"; SameSite=None; Secure";
+
 	let pElement = document.getElementsByTagName('p');
-	for (let i=0;i < pElement.length;i++) {
-		pElement[i].setAttribute('style', 'font-size:'+pSize+'px;')
-		document.cookie="textSize="+pSize +"; SameSite=None; Secure";
+	let liElement = document.getElementsByTagName('li');
+	let thElement = document.getElementsByTagName('th');
+	let tdElement = document.getElementsByTagName('td');
+	let captionElement = document.getElementsByTagName('caption');
+	loop(pElement, pElement.length-3,pSize);
+	loop(liElement, liElement.length,pSize)
+	loop(thElement, thElement.length,pSize);
+	loop(tdElement, tdElement.length,pSize);
+	loop(captionElement, captionElement.length,pSize);
+	/**
+	 * That is a local function to save some lines.
+	 * It is a for loop that goes over an Array of html elements and set an inline Style 'font-size'.
+	 * If an empty Array is given as a parameter it will do nothing and if a single element is given it will set the inline Style.
+	 * @param array input array with the html element
+	 * @param workLength the part of the array what should be change
+	 * @param size size of the font
+	 */
+	function loop(array, workLength, size){
+		if(workLength){
+			for (let i=0;i < workLength;i++) {
+			array[i].setAttribute('style', 'font-size:'+size+'px!important;');
+
+			}
+		}else if(array >0) {
+			array.setAttribute('style', 'font-size:'+size+'px!important;');
+		}
 	}
 }
 
@@ -194,6 +220,12 @@ function addListener() {
 function  elementWithOneAttributes(tag, attribut, value,){
 	let t = document.createElement(tag);
 	t.setAttribute(attribut, value);
+	return t;
+}
+function  elementWithTowAttributes(tag, attribut1, value1,attribut2, value2){
+	let t = document.createElement(tag);
+	t.setAttribute(attribut1, value2);
+	t.setAttribute(attribut2, value2);
 	return t;
 }
 

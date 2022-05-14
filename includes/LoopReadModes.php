@@ -1,29 +1,24 @@
 <?php
 /**
- * @description This fiel is the base for the LoopReadModes Extension. It is a
+ * @description This file is the base for the LoopReadModes Extension. It contains three functions to handle the used hooks.
  * @author Andreas Kißmehl
- * @version
+ * @version 0.1
  */
 
-/* Check ob ein MediaWiki vorhanden ist oder */
+/* That is a Check if the file runs in a MediaWiki*/
 if ( !defined( 'MEDIAWIKI' ) ) die ( "This file cannot be run standalone.\n" );
 
-/**
- * Dies Klasse LoopReadModes stellt zwei function zur verfügung welche notwendig sind um ein Div in den Dom zu hängen
- * und um CSS Daten und JavaScripte den Seiten hinzuzufügen.
- */
 class LoopReadModes
 {
 	/**
-	 * Diese function wird zu beginn von MediaWiki ausgeführt und muss für ein funktionierendes Plugin vorhanden sein.
+	 * This function is mandatory by mediaWiki. It runs when MediaWiki starts and it will do nothing.
 	 * @return void
 	 */
     public static function onExtensionLoad(){}
 
     /**
-	 * Der verwendete Hook BeforePageDisplay wird mit der function onBeforePageDisplay gerufen und fügt das notwendige JavaScript und die CSS datei hinzu.
+	 * The used BeforePageDisplay Hook is handled in this function. It adds a JavaScript Modul and a CSS file to the output what is send to the Client.
      * @param $out * OutputPage object.
-     * @param $skin * Skin object that will be used to generate the page.
      * @return void
      */
 
@@ -31,6 +26,12 @@ class LoopReadModes
     {
 		$out->addModules( ['extension.LoopReadModes.js', 'extension.LoopReadModes']);
     }
+
+	/**
+	 * The used BeforePageDisplay Hook is handled in this function. It adds a JavaScript Modul and a CSS file to the output what is send to the Client.
+	 * @param $output * OutputPage object.
+	 * @return void
+	 */
 	public static function onSpecialSearchResultsAppend($specialSearch, $output, $term)
 	{
 		$output->addModules( ['extension.LoopReadModes.js', 'extension.LoopReadModes']);

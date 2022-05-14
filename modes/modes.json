@@ -10,7 +10,7 @@
             "url": "./extensions/LoopReadModes/modes/css/lrs.css"
         },
         {
-            "name": "DARK MODE",
+            "name": "DARK",
             "url": "./extensions/LoopReadModes/modes/css/dark-mode.css"
         }
     ]
