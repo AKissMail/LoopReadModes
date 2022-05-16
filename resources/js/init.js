@@ -35,7 +35,7 @@ function getCookie(cookieName) {
 function build(input) {
 	let barWrapper = elementWithOneAttributes('div', 'id','loopReadModesBar');
 	let typoScale = getScale();
-	let style = getSelect(input.StyleID);
+	let style = getSelect(input);
 	barWrapper.append(typoScale);
 	barWrapper.append(style);
 	document.getElementById('banner-logo-container').append(barWrapper);
@@ -56,7 +56,7 @@ function build(input) {
  * and put each element in the dropdown list.
  * @param input an array of strings
  * @returns {undefined} the dropdown as html
- */
+
 function getSelect(input) {
 	let div = elementWithOneAttributes('div','id','loopReadModesStyle' );
 	let select = elementWithOneAttributes('select','id','loopReadModesStyleSelect' );
@@ -66,6 +66,20 @@ function getSelect(input) {
 		select.append(temp);
 	})
 	div.append(select);
+	return div;
+}
+ */
+
+function getSelect (input){
+	let data = input.Style;
+	let div = elementWithOneAttributes('div','id','loopReadModesStyle' );
+	//let select = elementWithOneAttributes('select','id','loopReadModesStyleSelect' );
+	data.forEach((item)=>{
+		let temp = elementWithTowAttributesAndText('button', item.name, 'style', 'background:'+itme.preViewBackground+'; color:'+item.preView,'onclick', 'updateStyle('+item.name+')');
+		temp.innerHTML = item;
+		div.append(temp);
+	})
+	//div.append(select);
 	return div;
 }
 
@@ -92,7 +106,7 @@ function getSelect(input) {
 
 /**
  * This function creates the buttons for adjusting the text size.
- * @returns An Div with the three Buttons.
+ * @returns An Div with the three Buttons.	sl
  */
 function getScale() {
 	let wrapper 	= elementWithOneAttributes('div', 'id', 'loopReadModesFont');
@@ -227,6 +241,13 @@ function  elementWithTowAttributes(tag, attribut1, value1,attribut2, value2){
 	t.setAttribute(attribut1, value2);
 	t.setAttribute(attribut2, value2);
 	return t;
+}
+function elementWithTowAttributesAndText(tag, tagText, attribut, value, event, callback){
+	let wrapper = document.createElement(tag);
+	wrapper.setAttribute(attribut, value,);
+	wrapper.setAttribute(event, callback);
+	wrapper.innerHTML= tagText;
+	return wrapper;
 }
 
 /**

@@ -3,15 +3,23 @@
     "Style" : [
         {
             "name": "LOOP",
-            "url": ""
+            "url": "",
+            "preViewBackground": "#",
+            "preView": "#"
         },
         {
             "name": "LRS",
-            "url": "./extensions/LoopReadModes/modes/css/lrs.css"
+            "url": "./extensions/LoopReadModes/modes/css/lrs.css",
+            "textSize": 26,
+            "preViewBackground": "#EDD1B0",
+            "preView": "#black"
         },
         {
             "name": "DARK",
-            "url": "./extensions/LoopReadModes/modes/css/dark-mode.css"
+            "url": "./extensions/LoopReadModes/modes/css/dark-mode.css",
+            "textSize": 16,
+            "preViewBackground": "#EDD1B0",
+            "preView": "#black"
         }
     ]
 }
