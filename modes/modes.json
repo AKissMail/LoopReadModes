@@ -4,8 +4,8 @@
         {
             "name": "LOOP",
             "url": "",
-            "preViewBackground": "#",
-            "preView": "#"
+            "preViewBackground": "#526ca2",
+            "preView": "#ffffff"
         },
         {
             "name": "LRS",
@@ -18,8 +18,8 @@
             "name": "DARK",
             "url": "./extensions/LoopReadModes/modes/css/dark-mode.css",
             "textSize": 16,
-            "preViewBackground": "#EDD1B0",
-            "preView": "#black"
+            "preViewBackground": "#000000",
+            "preView": "#ffffff"
         }
     ]
 }

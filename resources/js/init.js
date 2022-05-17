@@ -32,10 +32,10 @@ function getCookie(cookieName) {
 /**
  * This function set up the menubar and put it in the dom.
  */
-function build(input) {
+function build() {
 	let barWrapper = elementWithOneAttributes('div', 'id','loopReadModesBar');
 	let typoScale = getScale();
-	let style = getSelect(input);
+	let style = getSelect();
 	barWrapper.append(typoScale);
 	barWrapper.append(style);
 	document.getElementById('banner-logo-container').append(barWrapper);
@@ -50,36 +50,38 @@ function build(input) {
 		textSize = 16;
 	}
 }
+/*
+role="button"
+aria-pressed="false"
+tabindex="0"
+ */
+function getSelect(){
+	let div = elementWithOneAttributes('div', 'id', 'loopReadModesStyle');
+	let icon = elementWithTowAttributes('img', 'src', '../extensions/LoopReadModes/resources/img/icon.svg', 'alt', ' ');
+	div.addEventListener('click', ()=>{
+		div.append(getSelectButtens(config));
+		div.removeEventListener('click', ()=>{});
+	});
+	div.append(icon);
+	return div;
+
+}
+
 
 /**
- * This function set up a genuin select dropdown. It takes an array of strings as an input
- * and put each element in the dropdown list.
- * @param input an array of strings
- * @returns {undefined} the dropdown as html
-
-function getSelect(input) {
-	let div = elementWithOneAttributes('div','id','loopReadModesStyle' );
-	let select = elementWithOneAttributes('select','id','loopReadModesStyleSelect' );
-	input.forEach((item)=>{
-		let temp = elementWithTowAttributes('option', 'value',item, 'label', item);
-		temp.innerHTML = item;
-		select.append(temp);
-	})
-	div.append(select);
-	return div;
-}
+ * todo
  */
 
-function getSelect (input){
+function getSelectButtens (input){
 	let data = input.Style;
-	let div = elementWithOneAttributes('div','id','loopReadModesStyle' );
-	//let select = elementWithOneAttributes('select','id','loopReadModesStyleSelect' );
-	data.forEach((item)=>{
-		let temp = elementWithTowAttributesAndText('button', item.name, 'style', 'background:'+itme.preViewBackground+'; color:'+item.preView,'onclick', 'updateStyle('+item.name+')');
-		temp.innerHTML = item;
-		div.append(temp);
-	})
-	//div.append(select);
+	let div = elementWithOneAttributes('div','id','loopReadModesStyleButtons' );
+	for(let i= 0; i <data.length; i++){
+		let button = elementWithTowAttributes('button','id',  data[i].name,'style', 'background:'+data[i].preViewBackground+'; color:'+ data[i].preView);
+
+		button.addEventListener('click',()=>{updateStyle(data[i].name)});
+		button.innerHTML= data[i].name;
+		div.append(button);
+	}
 	return div;
 }
 
@@ -89,7 +91,6 @@ function getSelect (input){
  * functionality is build.
  */
  function fetchStyles(url) {
-
 	fetch(url)
 		.then(r =>{
 			r.json()
@@ -97,7 +98,7 @@ function getSelect (input){
 					if(r.StyleID.length === 0){
 						build(['LOOP']);
 					}else {
-						config =r;
+						config = r;
 						build(r);
 					}
 				});
@@ -142,6 +143,7 @@ function updateStyle(style) {
 	config.Style.forEach(temp=>{
 		if(style === temp.name){
 			styleURL = temp.url;
+			changeP(temp.textSize);
 			if(!search){
 				styleURL = '.'+styleURL;
 			}
@@ -155,6 +157,7 @@ function updateStyle(style) {
 			}
 			document.getElementsByTagName('head')[0].append(stylesheet);
 			document.cookie = "style="+ style+"; SameSite=None; Secure";
+
 			setSelect(style);
 		}
 	});
@@ -203,8 +206,8 @@ function changeP(pSize) {
  * This function puts the events on the element of the ReadModesBar.
  */
 function addListener() {
-	let styles = document.getElementById('loopReadModesStyleSelect');
- 	styles.onchange = (event)=>{
+	let styles = document.getElementById('loopReadModesStyleButtons');
+ 	styles.onclick = (event)=>{
 	 	updateStyle( styles.value.toString());
  	};
 	let smallText = document.getElementById('smallText');
@@ -236,12 +239,33 @@ function  elementWithOneAttributes(tag, attribut, value,){
 	t.setAttribute(attribut, value);
 	return t;
 }
+
+/**
+ * todo
+ * @param tag
+ * @param attribut1
+ * @param value1
+ * @param attribut2
+ * @param value2
+ * @returns {*}
+ */
 function  elementWithTowAttributes(tag, attribut1, value1,attribut2, value2){
 	let t = document.createElement(tag);
 	t.setAttribute(attribut1, value2);
 	t.setAttribute(attribut2, value2);
 	return t;
 }
+
+/**
+ * todo
+ * @param tag
+ * @param tagText
+ * @param attribut
+ * @param value
+ * @param event
+ * @param callback
+ * @returns {*}
+ */
 function elementWithTowAttributesAndText(tag, tagText, attribut, value, event, callback){
 	let wrapper = document.createElement(tag);
 	wrapper.setAttribute(attribut, value,);
@@ -249,6 +273,7 @@ function elementWithTowAttributesAndText(tag, tagText, attribut, value, event, c
 	wrapper.innerHTML= tagText;
 	return wrapper;
 }
+
 
 /**
  * That is the first function how get called after the file is on the Client.

@@ -11,7 +11,14 @@
 	display:flex;
 	justify-content:flex-end
 }
-
+#loopReadModesStyle{
+	width:25px;
+}
+#loopReadModesStyleButtons{
+	display:grid;
+	margin-top: var(--main-height);
+	z-index:1;
+}
 #loopReadModesBar >div > select {
 	background-color: var(--main-bg-color);;
 	height: var(--main-height);
