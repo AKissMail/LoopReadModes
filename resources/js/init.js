@@ -28,9 +28,8 @@ function getCookie(cookieName) {
 	}
 	return "";
 }
-
 /**
- * This function set up the menubar and put it in the dom.
+ * This function set up the menubar and put it in the dom. todo hier nochmal die beiden Button Gruppen zusammen fassen. Ich habe den Zweck von build über 5 Function verteilt
  */
 function build() {
 	let barWrapper = elementWithOneAttributes('div', 'id','loopReadModesBar');
@@ -39,7 +38,6 @@ function build() {
 	barWrapper.append(typoScale);
 	barWrapper.append(style);
 	document.getElementById('banner-logo-container').append(barWrapper);
-
 	addListener();
 	if(currentStyle){
 		updateStyle(currentStyle);
@@ -50,22 +48,20 @@ function build() {
 		textSize = 16;
 	}
 }
-/*
-role="button"
-aria-pressed="false"
-tabindex="0"
+/**
+ * This function creates a Button in a Div and Set an EventListener. todo
+ * @returns {*}
  */
 function getSelect(){
 	let div = elementWithOneAttributes('div', 'id', 'loopReadModesStyle');
-	let button = elementWithTowAttributes('button','id', 'loopReadModesStyleButtonClose', 'class', 'rmBtn');
-	button.innerHTML = 'Modes';
+	let button = elementWithTowAttributesAndInnerHTML('button','id', 'loopReadModesStyleButtonClose', 'class', 'rmBtn','Modes');
 	button.addEventListener('click', selectDropDown);
 	div.append(button);
 	return div;
 }
-
 /**
- * todo
+ * This function checks if a specific button has the ID loopReadModesStyleButtonClose or Open.
+ * Depending on the case it will add or remove the button's and set a new id.
  */
 function selectDropDown(){
 	let div = document.getElementById('loopReadModesStyle');
@@ -80,7 +76,6 @@ function selectDropDown(){
 		btn.setAttribute('id','loopReadModesStyleButtonOpen')
 	}
 }
-
 /**
  * This function removes Elements from the DOM with a given id.
  * @param id the id of the Element that will be removed from the Dom.
@@ -88,11 +83,10 @@ function selectDropDown(){
 function removeElementByID(id) {
 	document.getElementById(id).remove();
 }
-
 /**
- * todo
+ * This function creates a Dropdown out of Buttons.
+ * Ths Dropdown is created after the config Objekt what is stored in the config variable.
  */
-
 function getSelectButtens (input){
 	let data = input.Style;
 	let div = elementWithOneAttributes('div','id','loopReadModesStyleButtons');
@@ -105,7 +99,6 @@ function getSelectButtens (input){
 	}
 	return div;
 }
-
 /**
  * This function fetch a json file from the Server, save it in the global variable config and calls build.
  * If the JSON file is empty or an Error happens it just calls build() with ['LOOP'] and the bar with it scaling
@@ -125,28 +118,23 @@ function getSelectButtens (input){
 				});
 		});
 }
-
 /**
  * This function creates the buttons for adjusting the text size.
- * @returns An Div with the three Buttons.	sl
+ * @returns An Div with the three Buttons.
  */
 function getScale() {
 	let wrapper 	= elementWithOneAttributes('div', 'id', 'loopReadModesFont');
-	let smallText 	= elementWithTowAttributes('button', 'id', 'smallText', 'class', 'rmBtn');
-	let normalText 	= elementWithTowAttributes('button', 'id', 'normalText', 'class', 'rmBtn');
-	let largeText 	= elementWithTowAttributes('button', 'id', 'largeText', 'class', 'rmBtn');
-	smallText.innerHTML = 'A-';
-	normalText.innerHTML = 'A';
-	largeText.innerHTML = 'A+';
+	let smallText 	= elementWithTowAttributesAndInnerHTML('button', 'id', 'smallText', 'class', 'rmBtn', 'A-');
+	let normalText 	= elementWithTowAttributesAndInnerHTML('button', 'id', 'normalText', 'class', 'rmBtn', 'A');
+	let largeText 	= elementWithTowAttributesAndInnerHTML('button', 'id', 'largeText', 'class', 'rmBtn', 'A+');
 	wrapper.append(smallText);
 	wrapper.append(normalText);
 	wrapper.append(largeText);
 	return wrapper;
 }
-
 /**
- * This function takes a Keyword and checks if the keyword appears in the config variable.
- * If so it takes the URL out of the config variable and creates link tag with the URL.
+ * This function takes a Keyword and checks if the keyword appears in the config objekt.
+ * If so it takes the URL out of the config objekt and creates link tag with the URL.
  * Before the tag is put in the DOM, it checkt if a custom Style is already in the DOM and remove it.
  * For this reason the id 'LoopReadModesStyleSheet' is used.
  * @param style the chosen style
@@ -169,18 +157,18 @@ function updateStyle(style) {
 			}
 			document.getElementsByTagName('head')[0].append(stylesheet);
 			document.cookie = "style="+ style+"; SameSite=None; Secure";
+			document.getElementById('loopReadModesStyleButtonOpen').setAttribute('id','loopReadModesStyleButtonClose');
+			removeElementByID('loopReadModesStyleButtons');
 		}
 	});
 }
-
 /**
- * This function change the font-size of all p, li, th and td tags to a given px number.
+ * This function change the font-size of all p, li, th, td, caption tags to a given px number.
  * The given number is saved in a cookie called 'textSize'.
- * @param pSize the px size of the p, li, th and td.
+ * @param pSize the px size of the p, li, th, caption and td.
  */
 function changeP(pSize) {
 	document.cookie="textSize="+pSize +"; SameSite=None; Secure";
-
 	let pElement = document.getElementsByTagName('p');
 	let liElement = document.getElementsByTagName('li');
 	let thElement = document.getElementsByTagName('th');
@@ -191,28 +179,25 @@ function changeP(pSize) {
 	loop(thElement, thElement.length,pSize);
 	loop(tdElement, tdElement.length,pSize);
 	loop(captionElement, captionElement.length,pSize);
-	/**
-	 * That is a local function to save some lines.
-	 * It is a for loop that goes over an Array of html elements and set an inline Style 'font-size'.
-	 * If an empty Array is given as a parameter it will do nothing and if a single element is given it will set the inline Style.
-	 * @param array input array with the html element
-	 * @param workLength the part of the array what should be change
-	 * @param size size of the font
-	 */
-	function loop(array, workLength, size){
-		if(workLength){
-			for (let i=0;i < workLength;i++) {
+}
+/**
+ * This function is a for loop that goes over an Array of html elements and set an inline Style 'font-size'.
+ * If an empty Array is given as a parameter it will do nothing and if a single element is given as a parameter it will set the inline Style.
+ * @param array input array with the html elements
+ * @param workLength the part of the array what should be change
+ * @param size size of the font
+ */
+function loop(array, workLength, size){
+	if(workLength){
+		for (let i=0;i < workLength;i++) {
 			array[i].setAttribute('style', 'font-size:'+size+'px!important;');
-
-			}
-		}else if(array >0) {
-			array.setAttribute('style', 'font-size:'+size+'px!important;');
 		}
+	}else if(array >0) {
+		array.setAttribute('style', 'font-size:'+size+'px!important;');
 	}
 }
-
 /**
- * This function puts the events on the element of the ReadModesBar.
+ * This function puts the events on the element of the ReadModesBar. todo
  */
 function addListener() {
 	let smallText = document.getElementById('smallText');
@@ -231,7 +216,6 @@ function addListener() {
 		changeP(textSize);
 	}
 }
-
 /**
  * This function creates a dom element with one attributes and values.
  * @param tag the kind of the tag
@@ -244,15 +228,14 @@ function  elementWithOneAttributes(tag, attribut, value,){
 	t.setAttribute(attribut, value);
 	return t;
 }
-
 /**
- * todo
- * @param tag
- * @param attribut1
- * @param value1
- * @param attribut2
- * @param value2
- * @returns {*}
+ * This function creates and returns an DOM-Element after given parameters.
+ * @param tag Type of the Dom-Element
+ * @param attribut1 name of the attribut1
+ * @param value1 value of the attribut1
+ * @param attribut2 name of the attribut2
+ * @param value2 value of the attribut2
+ * @returns {*} the DOM-Element
  */
 function  elementWithTowAttributes(tag, attribut1, value1,attribut2, value2){
 	let t = document.createElement(tag);
@@ -260,15 +243,33 @@ function  elementWithTowAttributes(tag, attribut1, value1,attribut2, value2){
 	t.setAttribute(attribut2, value2);
 	return t;
 }
-
 /**
- * todo
- * @param tag
- * @param attribut1
- * @param value1
- * @param attribut2
- * @param value2
- * @returns {*}
+ * This function creates and returns an DOM-Element after given parameters and puts content inside.
+ * @param tag Type of the Dom-Element
+ * @param attribut1 name of the attribut1
+ * @param value1 value of the attribut1
+ * @param attribut2 name of the attribut2
+ * @param value2 value of the attribut2
+ * @param innerHTML the value of the Content
+ * @returns {*} the DOM-Element
+ */
+function elementWithTowAttributesAndInnerHTML(tag, attribut1, value1,attribut2, value2, innerHTML) {
+	let t = document.createElement(tag);
+	t.setAttribute(attribut1, value1);
+	t.setAttribute(attribut2, value2);
+	t.innerHTML = innerHTML;
+	return t;
+}
+/**
+ * This function creates and returns an DOM-Element after given parameters.
+ * @param tag Type of the Dom-Element
+ * @param attribut1 name of the attribut1
+ * @param value1 value of the attribut1
+ * @param attribut2 name of the attribut2
+ * @param value2 value of the attribut2
+ * @param attribut3 name of the attribut3
+ * @param value3 value of the attribut3
+ * @returns {*} the DOM-Element
  */
 function elementWithThreeAttributes(tag, attribut1, value1,attribut2, value2,attribut3, value3){
 	let t = document.createElement(tag);
@@ -277,10 +278,8 @@ function elementWithThreeAttributes(tag, attribut1, value1,attribut2, value2,att
 	t.setAttribute(attribut3, value3);
 	return t;
 }
-
-
 /**
- * That is the first function how get called after the file is on the Client.
+ * That is the first function how get called after the file is fetch in the Client.
  */
 (()=>{
 	if(!window.location.href.split('?')[1]){

@@ -38,7 +38,7 @@ body , #page-content, #content-inner-wrapper, .form-control{
 #user-menu-dropdown{
 	background-color:#f8f9fa!important;
 }
-#rmBtn{
+.rmBtn{
 	color: var(--font-color)!important;
 }
 
