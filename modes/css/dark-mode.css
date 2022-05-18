@@ -5,8 +5,8 @@
 	--background-color: #2c2c2c;
 	--background-color-secondary: #3c3f41;
 	--border-top-color: #fdfdfd;
-	--typo-color: #fdfdfd;
-	--typo-color-link: #c3c3cb;
+	--font-color: #fdfdfd;
+	--font-color-link: #c3c3cb;
 	--iconColor:#fdfdfd;
 }
 /*Color*/
@@ -37,10 +37,10 @@ body , #page-content, #content-inner-wrapper, .form-control{
 
 /* Typo */
 h1, h2, h3, h4, h5, h6, p, .form-control::placeholder, .panel-title,.btn, .page-symbol {
-	color: var(--typo-color)!important;
+	color: var(--font-color)!important;
 }
 a, #main-footer{
-	color: var(--typo-color-link)!important;
+	color: var(--font-color-link)!important;
 	text-decoration: underline !important;
 }
 #smallText, #normalText, #largeText{

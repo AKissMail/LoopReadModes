@@ -1,12 +1,16 @@
-:root{
+
+@import url('fonts/fonts.css');
+
+  :root{
 	--main-bg-color: #EDD1B0;
 	--main-bg-secondary-color: #b48c79;
 	--main-height: 45px;
 	--background-color: #EDD1B0;
 	--background-color-secondary: #b48c79;
 	--border-top-color: black;
-	--typo-color: black;
-	--typo-color-link: black;
+	--font-color: black;
+	--font-color-link: black;
+	--font: 'Courier Prime', monospace;
 	--iconColor:#000000!important;
 }
 /*Color*/
@@ -34,13 +38,19 @@ body , #page-content, #content-inner-wrapper, .form-control{
 #user-menu-dropdown{
 	background-color:#f8f9fa!important;
 }
+#rmBtn{
+	color: var(--font-color)!important;
+}
 
 /* Typo */
 h1, h2, h3, h4, h5, h6, p, .form-control::placeholder, .panel-title,.btn, .page-symbol {
-	color: var(--typo-color)!important;
+	color: var(--font-color)!important;
+}
+h1, h2, h3, h4, h5, h6, p, .form-control::placeholder, .panel-title,.btn{
+	font-family:var(--font)!important;
 }
 a, #main-footer{
-	color: var(--typo-color-link)!important;
+	color: var(--font-color-link)!important;
 	text-decoration: underline !important;
 }
 #smallText, #normalText, #largeText{
@@ -89,4 +99,26 @@ p{
 }
 #Ebene_1{
 	color: #000000 !important;
+}
+.wikitable > tr > th, .wikitable > * > tr > th{
+	background-color: var(--main-bg-secondary-color)!important;
+}
+.wikitable > tr > th, .wikitable > tr > td, .wikitable > * > tr > th, .wikitable > * > tr > td{
+	border: 1px solid #000000;
+	background-color:var(--background-color);
+}
+caption{
+	color:var(--font-color)!important;
+}
+.oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-flaggedElement-primary.oo-ui-flaggedElement-progressive > .oo-ui-buttonElement-button,
+.oo-ui-checkboxInputWidget.oo-ui-widget-enabled [type="checkbox"]:checked + span, .mw-ui-button.mw-ui-progressive{
+	color: var(--font-color)!important;
+	background-color: var(--main-bg-secondary-color)!important;
+	border-color: var(--font-color)!important;
+}
+.mw-search-profile-tabs {
+	background-color: var(--main-bg-color)!important;
+	margin-top: 0!important;
+	border: none!important;
+	border-radius: 0!important;
 }

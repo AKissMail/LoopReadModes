@@ -3,6 +3,7 @@
 	--main-bg-secondary-color: #7d9df1;
 	--main-height: 45px;
 	--iconColor: #fff;
+	--font-size: 25px;
 }
 #loopReadModesBar{
 	background:var(--main-bg-color);
@@ -12,18 +13,19 @@
 	justify-content:flex-end
 }
 #loopReadModesStyle{
-	width:25px;
+	width:80px;
 }
 #loopReadModesStyleButtons{
 	display:grid;
-	margin-top: var(--main-height);
+
 	z-index:1;
+	position: relative;
 }
 #loopReadModesBar >div > select {
 	background-color: var(--main-bg-color);;
 	height: var(--main-height);
 	color: #fff;
-	font-size: 25px;
+	font-size: var(--font-size);
 	border: none;
 	-webkit-appearance: button;
 	outline: none;
@@ -37,16 +39,25 @@
 	justify-content:center;
 
 }
-#loopReadModesFont > button {
-	background-color: var(--main-bg-color);;
+.rmBtn {
+	background-color: var(--main-bg-color);
 	border: none;
 	width:	var(--main-height);
 	height: var(--main-height);
-}
-#loopReadModesFont > button:hover,#loopReadModesFont > button:focus  {
-	background-color: var(--main-bg-secondary-color);
-}
-#smallText, #normalText, #largeText{
 	color: #fff;
-	font-size: 25px;
+	font-size:var(--font-size);
+}
+.dropdownBtn{
+	border: none;
+	height: var(--main-height);
+	font-size:var(--font-size);
+}
+.dropdownBtn:hover,  .dropdownBtn:focus {
+	text-decoration: underline;
+}
+#loopReadModesStyleButtonClose, #loopReadModesStyleButtonOpen{
+	width:80px;
+}
+.rmBtn:hover,.rmBtn:focus{
+	background-color: var(--main-bg-secondary-color);
 }

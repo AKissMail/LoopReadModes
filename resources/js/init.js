@@ -1,12 +1,12 @@
 /**
  * @author Andreas Kißmehl
  */
-let config; 										// Global variable for the Config object after it is fetched from the Server.
-let styleURL;										// The URI of the current Stylesheet
-let currentStyle = getCookie("style");	// the Current Style.
-let textSize = getCookie("textSize");	// The current TextSize
-let search = false; 								// boolean to determined wich hook is use. true = onSpecialSearchResultsAppend; false = onBeforePageDisplay;
-const configURL= "./extensions/LoopReadModes/modes/modes.json"; // URI of the Configuration file.
+let 	config; 										// Global variable for the Config object after it is fetched from the Server.
+let 	styleURL;										// The URI of the current Stylesheet
+let 	currentStyle = getCookie("style");	// the Current Style.
+let 	textSize = getCookie("textSize");	// The current TextSize
+let 	search = false; 								// boolean to determined wich hook is use. true = onSpecialSearchResultsAppend; false = onBeforePageDisplay;
+const 	configURL= "./extensions/LoopReadModes/modes/modes.json"; // URI of the Configuration file.
 
 /**
  * That function checks if a Cookie is already set with a preferred style and return that name of the style.
@@ -57,16 +57,37 @@ tabindex="0"
  */
 function getSelect(){
 	let div = elementWithOneAttributes('div', 'id', 'loopReadModesStyle');
-	let icon = elementWithTowAttributes('img', 'src', '../extensions/LoopReadModes/resources/img/icon.svg', 'alt', ' ');
-	div.addEventListener('click', ()=>{
-		div.append(getSelectButtens(config));
-		div.removeEventListener('click', ()=>{});
-	});
-	div.append(icon);
+	let button = elementWithTowAttributes('button','id', 'loopReadModesStyleButtonClose', 'class', 'rmBtn');
+	button.innerHTML = 'Modes';
+	button.addEventListener('click', selectDropDown);
+	div.append(button);
 	return div;
-
 }
 
+/**
+ * todo
+ */
+function selectDropDown(){
+	let div = document.getElementById('loopReadModesStyle');
+	let btn = document.getElementById('loopReadModesStyleButtonClose');
+	let altBtn = document.getElementById('loopReadModesStyleButtonOpen');
+	if(!btn){
+		removeElementByID('loopReadModesStyleButtons');
+		altBtn.setAttribute('id','loopReadModesStyleButtonClose');
+	}
+	else {
+		div.append(getSelectButtens(config));
+		btn.setAttribute('id','loopReadModesStyleButtonOpen')
+	}
+}
+
+/**
+ * This function removes Elements from the DOM with a given id.
+ * @param id the id of the Element that will be removed from the Dom.
+ */
+function removeElementByID(id) {
+	document.getElementById(id).remove();
+}
 
 /**
  * todo
@@ -74,9 +95,9 @@ function getSelect(){
 
 function getSelectButtens (input){
 	let data = input.Style;
-	let div = elementWithOneAttributes('div','id','loopReadModesStyleButtons' );
+	let div = elementWithOneAttributes('div','id','loopReadModesStyleButtons');
 	for(let i= 0; i <data.length; i++){
-		let button = elementWithTowAttributes('button','id',  data[i].name,'style', 'background:'+data[i].preViewBackground+'; color:'+ data[i].preView);
+		let button = elementWithThreeAttributes('button','id',  data[i].name,'style', 'background:'+data[i].preViewBackground+'; color:'+ data[i].preView, 'class', 'dropdownBtn');
 
 		button.addEventListener('click',()=>{updateStyle(data[i].name)});
 		button.innerHTML= data[i].name;
@@ -111,9 +132,9 @@ function getSelectButtens (input){
  */
 function getScale() {
 	let wrapper 	= elementWithOneAttributes('div', 'id', 'loopReadModesFont');
-	let smallText 	= elementWithOneAttributes('button', 'id', 'smallText');
-	let normalText 	= elementWithOneAttributes('button', 'id', 'normalText');
-	let largeText 	= elementWithOneAttributes('button', 'id', 'largeText');
+	let smallText 	= elementWithTowAttributes('button', 'id', 'smallText', 'class', 'rmBtn');
+	let normalText 	= elementWithTowAttributes('button', 'id', 'normalText', 'class', 'rmBtn');
+	let largeText 	= elementWithTowAttributes('button', 'id', 'largeText', 'class', 'rmBtn');
 	smallText.innerHTML = 'A-';
 	normalText.innerHTML = 'A';
 	largeText.innerHTML = 'A+';
@@ -121,15 +142,6 @@ function getScale() {
 	wrapper.append(normalText);
 	wrapper.append(largeText);
 	return wrapper;
-}
-
-/**
- * This functon set the select dropdown to the activ style if it is read out of a cookie.
- * @param style the name of the active style
- */
-function setSelect(style) {
-	let select = document.getElementById('loopReadModesStyleSelect');
-	select.value=style;
 }
 
 /**
@@ -157,11 +169,8 @@ function updateStyle(style) {
 			}
 			document.getElementsByTagName('head')[0].append(stylesheet);
 			document.cookie = "style="+ style+"; SameSite=None; Secure";
-
-			setSelect(style);
 		}
 	});
-
 }
 
 /**
@@ -206,10 +215,6 @@ function changeP(pSize) {
  * This function puts the events on the element of the ReadModesBar.
  */
 function addListener() {
-	let styles = document.getElementById('loopReadModesStyleButtons');
- 	styles.onclick = (event)=>{
-	 	updateStyle( styles.value.toString());
- 	};
 	let smallText = document.getElementById('smallText');
 	smallText.onclick = (event) =>{
 		textSize--;
@@ -251,7 +256,7 @@ function  elementWithOneAttributes(tag, attribut, value,){
  */
 function  elementWithTowAttributes(tag, attribut1, value1,attribut2, value2){
 	let t = document.createElement(tag);
-	t.setAttribute(attribut1, value2);
+	t.setAttribute(attribut1, value1);
 	t.setAttribute(attribut2, value2);
 	return t;
 }
@@ -259,19 +264,18 @@ function  elementWithTowAttributes(tag, attribut1, value1,attribut2, value2){
 /**
  * todo
  * @param tag
- * @param tagText
- * @param attribut
- * @param value
- * @param event
- * @param callback
+ * @param attribut1
+ * @param value1
+ * @param attribut2
+ * @param value2
  * @returns {*}
  */
-function elementWithTowAttributesAndText(tag, tagText, attribut, value, event, callback){
-	let wrapper = document.createElement(tag);
-	wrapper.setAttribute(attribut, value,);
-	wrapper.setAttribute(event, callback);
-	wrapper.innerHTML= tagText;
-	return wrapper;
+function elementWithThreeAttributes(tag, attribut1, value1,attribut2, value2,attribut3, value3){
+	let t = document.createElement(tag);
+	t.setAttribute(attribut1, value1,);
+	t.setAttribute(attribut2, value2);
+	t.setAttribute(attribut3, value3);
+	return t;
 }
 
 
