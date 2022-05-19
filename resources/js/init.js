@@ -6,8 +6,8 @@ let 	styleURL;										// The URI of the current Stylesheet
 let 	currentStyle = getCookie("style");	// the Current Style.
 let 	textSize = getCookie("textSize");	// The current TextSize
 //let 	search = false; 								// boolean to determined wich hook is use. true = onSpecialSearchResultsAppend; false = onBeforePageDisplay;
-const 	configURL= "../extensions/LoopReadModes/modes/modes.json"; // URI of the Configuration file.
-
+//const 	configURL= "../extensions/LoopReadModes/modes/modes.json"; // URI of the Configuration file.
+const 	configURL=  mw.config.get( 'wgServer' ) + "/" + mw.config.get( 'wgScriptPath' ) + "/extensions/LoopReadModes/modes/modes.json"; // URI of the Configuration file.
 /**
  * That function checks if a Cookie is already set with a preferred style and return that name of the style.
  * If the function fond nothing the sting '' is returned.
