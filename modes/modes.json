@@ -9,7 +9,7 @@
         },
         {
             "name": "LRS",
-            "url": "../extensions/LoopReadModes/modes/css/lrs.css",
+            "url": "/extensions/LoopReadModes/modes/css/lrs.css",
             "textSize": 26,
             "preViewBackground": "#EDD1B0",
             "preView": "#black"

@@ -142,7 +142,7 @@ function getScale() {
 function updateStyle(style) {
 	config.Style.forEach(temp=>{
 		if(style === temp.name){
-			styleURL = temp.url;
+			styleURL = mw.config.get( 'wgScriptPath' ) + temp.url;
 			changeP(temp.textSize);
 			//if(!search){
 			//	styleURL = '.'+styleURL;
