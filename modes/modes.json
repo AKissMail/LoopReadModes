@@ -13,13 +13,6 @@
             "textSize": 26,
             "preViewBackground": "#EDD1B0",
             "preView": "#black"
-        },
-        {
-            "name": "DARK",
-            "url": "./extensions/LoopReadModes/modes/css/dark-mode.css",
-            "textSize": 16,
-            "preViewBackground": "#000000",
-            "preView": "#ffffff"
         }
     ]
 }

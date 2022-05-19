@@ -5,8 +5,8 @@ let 	config; 										// Global variable for the Config object after it is fetc
 let 	styleURL;										// The URI of the current Stylesheet
 let 	currentStyle = getCookie("style");	// the Current Style.
 let 	textSize = getCookie("textSize");	// The current TextSize
-let 	search = false; 								// boolean to determined wich hook is use. true = onSpecialSearchResultsAppend; false = onBeforePageDisplay;
-const 	configURL= "./extensions/LoopReadModes/modes/modes.json"; // URI of the Configuration file.
+//let 	search = false; 								// boolean to determined wich hook is use. true = onSpecialSearchResultsAppend; false = onBeforePageDisplay;
+const 	configURL= "../extensions/LoopReadModes/modes/modes.json"; // URI of the Configuration file.
 
 /**
  * That function checks if a Cookie is already set with a preferred style and return that name of the style.
@@ -144,9 +144,9 @@ function updateStyle(style) {
 		if(style === temp.name){
 			styleURL = temp.url;
 			changeP(temp.textSize);
-			if(!search){
-				styleURL = '.'+styleURL;
-			}
+			//if(!search){
+			//	styleURL = '.'+styleURL;
+			//}
 			let stylesheet = document.createElement('link');
 			stylesheet.setAttribute('rel', 'stylesheet');
 			stylesheet.setAttribute('type', "text/css");
@@ -282,11 +282,11 @@ function elementWithThreeAttributes(tag, attribut1, value1,attribut2, value2,att
  * That is the first function how get called after the file is fetch in the Client.
  */
 (()=>{
-	if(!window.location.href.split('?')[1]){
-		search = false;
-		fetchStyles('.'+configURL);}
-	else {
-		search = true;
+	//if(!window.location.href.split('?')[1]){
+	// search = false;
+	//fetchStyles('.'+configURL);}
+	//else {
+	//	search = true;
 		fetchStyles(configURL);
-	}
+	//}
 })();
