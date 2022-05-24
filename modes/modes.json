@@ -1,5 +1,5 @@
 {
-    "Style" : [
+    "modes" : [
         {
             "name": "LOOP",
             "url": "",
@@ -12,7 +12,7 @@
             "url": "/extensions/LoopReadModes/modes/css/lrs.css",
             "textSize": 26,
             "preViewBackground": "#EDD1B0",
-            "preView": "#black"
+            "preView": "#000000"
         }
     ]
 }

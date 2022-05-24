@@ -1,63 +1,68 @@
+/*
+ This file is part of the Extension and contains the CCS rules for the LoopReadModes menu bar and buttons.
+ @author Andreas Kißmehl
+ */
+
+/** The basic parameters  for the Bar.
+	--main-bg-color: Background-color for the Bar.
+	--main-bg-secondary-color: Background-color for the Bar if :hover or focus is active.
+	--main-height: The basic height of the Bar and the buttons-
+	--iconColor: The Color of the Font in the buttons.
+	--font-size: Zhe font size of the Font in the buttons.
+*/
 :root {
 	--main-bg-color: #526ca2;
 	--main-bg-secondary-color: #7d9df1;
 	--main-height: 45px;
-	--iconColor: #fff;
+	--iconColor: #ffffff;
 	--font-size: 25px;
 }
-#loopReadModesBar{
+/*-------------------------------- classes -------------------------------- */
+/* This are the parameters for the menubar*/
+.rmBtn {
+	background-color: var(--main-bg-color);
+	border: none;
+	width:	var(--main-height);
+	height: var(--main-height);
+	color: var(--iconColor);
+	font-size:var(--font-size);
+}
+
+/* This are the parameters for the Dropdown buttons */
+.dropdownBtn{
+	border: none;
+	height: var(--main-height);
+	font-size:var(--font-size);
+}
+/* This are the parameters for the dropdown buttons css pseudo-classes */
+.dropdownBtn:hover,  .dropdownBtn:focus {
+	text-decoration: underline;
+}
+/* This are the parameters for the buttons css pseudo-classes */
+.rmBtn:hover,.rmBtn:focus {
+	background-color: var(--main-bg-secondary-color);
+}
+/*-------------------------------- id -------------------------------- */
+/* This are the parameters for the wrapper div of the LoopReadModesBar */
+#rmBar{
 	background:var(--main-bg-color);
 	width:100%;
 	height:var(--main-height);
 	display:flex;
 	justify-content:flex-end
 }
-#loopReadModesStyle{
+/* this is the setting of the width for the Buttons that select the Mode*/
+#rmModes, #rmClose, #rmOpen{
 	width:80px;
 }
-#loopReadModesStyleButtons{
-	display:grid;
-
-	z-index:1;
-	position: relative;
-}
-#loopReadModesBar >div > select {
-	background-color: var(--main-bg-color);;
-	height: var(--main-height);
-	color: #fff;
-	font-size: var(--font-size);
-	border: none;
-	-webkit-appearance: button;
-	outline: none;
-}
-#loopReadModesBar >div > select:hover, #loopReadModesBar >div > select:focus {
-	background-color: var(--main-bg-secondary-color);
- }
-
-#loopReadModesFont {
+/* this are the setting of scaling buttons */
+#rmScale {
 	display: flex;
 	justify-content:center;
-
 }
-.rmBtn {
-	background-color: var(--main-bg-color);
-	border: none;
-	width:	var(--main-height);
-	height: var(--main-height);
-	color: #fff;
-	font-size:var(--font-size);
-}
-.dropdownBtn{
-	border: none;
-	height: var(--main-height);
-	font-size:var(--font-size);
-}
-.dropdownBtn:hover,  .dropdownBtn:focus {
-	text-decoration: underline;
-}
-#loopReadModesStyleButtonClose, #loopReadModesStyleButtonOpen{
-	width:80px;
-}
-.rmBtn:hover,.rmBtn:focus{
-	background-color: var(--main-bg-secondary-color);
+/* this are the setting of the dropdown buttons */
+#rmDropdown{
+	display:grid;
+	z-index:1;
+	position: relative;
 }
