@@ -1,9 +1,9 @@
 {
-    "StyleID": ["LOOP","LRS", "DARK MODE"],
     "Style" : [
         {
             "name": "LOOP",
             "url": "",
+			"textSize": 16,
             "preViewBackground": "#526ca2",
             "preView": "#ffffff"
         },
