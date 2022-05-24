@@ -1,4 +1,10 @@
+/*
+ This file is a mode that it ment to be used in the MediaWiki Extension LoopReadModes.
+ It will help dyslexic people to read more comfortable.
+ @author Andreas Kißmehl
+ */
 
+/*import for the used Font*/
 @import url('fonts/fonts.css');
 
   :root{

@@ -2,11 +2,9 @@
  * @author Andreas Kißmehl
  */
 let 	config; 										// Global variable for the Config object after it is fetched from the Server.
-let 	styleURL;										// The URI of the current Stylesheet
-let 	currentStyle = getCookie("style");	// the Current Style.
+let 	modeURL;										// The URI of the current Stylesheet
+let 	currentMode = getCookie("mode");	// the Current Style.
 let 	textSize = getCookie("textSize");	// The current TextSize
-//let 	search = false; 								// boolean to determined wich hook is use. true = onSpecialSearchResultsAppend; false = onBeforePageDisplay;
-//const 	configURL= "../extensions/LoopReadModes/modes/modes.json"; // URI of the Configuration file.
 const 	configURL=  mw.config.get( 'wgServer' ) + "/" + mw.config.get( 'wgScriptPath' ) + "/extensions/LoopReadModes/modes/modes.json"; // URI of the Configuration file.
 /**
  * That function checks if a Cookie is already set with a preferred style and return that name of the style.
@@ -29,52 +27,44 @@ function getCookie(cookieName) {
 	return "";
 }
 /**
- * This function set up the menubar and put it in the dom. todo hier nochmal die beiden Button Gruppen zusammen fassen. Ich habe den Zweck von build über 5 Function verteilt
+ * This function set up the menubar and put it in the dom.
  */
 function build() {
-	let barWrapper = elementWithOneAttributes('div', 'id','loopReadModesBar');
+	console.log(config);
+	let barWrapper = elementWithOneAttributes('div', 'id','rmBar');
 	let typoScale = getScale();
-	let style = getSelect();
+	let modes = getSelect();
 	barWrapper.append(typoScale);
-	barWrapper.append(style);
+	barWrapper.append(modes);
 	document.getElementById('banner-logo-container').append(barWrapper);
-	addListener();
-	if(currentStyle){
-		updateStyle(currentStyle);
-	}
-	if(textSize){
-		changeP(textSize);
-	}else{
-		textSize = 16;
-	}
+
+	(currentMode)? updateMode(currentMode):false;
+	(textSize) ? changeTextSize(textSize): false;
+	(!textSize) ? textSize = 16: false;
 }
 /**
- * This function creates a Button in a Div and Set an EventListener. todo
+ * This function creates a Button in a Div and Set an EventListener.
  * @returns {*}
  */
 function getSelect(){
-	let div = elementWithOneAttributes('div', 'id', 'loopReadModesStyle');
-	let button = elementWithTowAttributesAndInnerHTML('button','id', 'loopReadModesStyleButtonClose', 'class', 'rmBtn','Modes');
+	let div = elementWithOneAttributes('div', 'id', 'rmModes');
+	let button = elementWithTowAttributesAndInnerHTML('button','id', 'rmClose', 'class', 'rmBtn','Modes');
 	button.addEventListener('click', selectDropDown);
 	div.append(button);
 	return div;
 }
 /**
- * This function checks if a specific button has the ID loopReadModesStyleButtonClose or Open.
+ * This function checks if a specific button has the ID rmClose or Open.
  * Depending on the case it will add or remove the button's and set a new id.
  */
 function selectDropDown(){
-	let div = document.getElementById('loopReadModesStyle');
-	let btn = document.getElementById('loopReadModesStyleButtonClose');
-	let altBtn = document.getElementById('loopReadModesStyleButtonOpen');
-	if(!btn){
-		removeElementByID('loopReadModesStyleButtons');
-		altBtn.setAttribute('id','loopReadModesStyleButtonClose');
-	}
-	else {
-		div.append(getSelectButtens(config));
-		btn.setAttribute('id','loopReadModesStyleButtonOpen')
-	}
+	let div = document.getElementById('rmModes');
+	let btn = document.getElementById('rmClose');
+	let altBtn = document.getElementById('rmOpen');
+	(!btn)? removeElementByID('rmDropdown'):false;
+	(!btn)? altBtn.setAttribute('id','rmClose'):false;
+	(btn)? div.append(getModeButtons(config)):false;
+	(btn)? btn.setAttribute('id','rmOpen'):false;
 }
 /**
  * This function removes Elements from the DOM with a given id.
@@ -87,13 +77,12 @@ function removeElementByID(id) {
  * This function creates a Dropdown out of Buttons.
  * Ths Dropdown is created after the config Objekt what is stored in the config variable.
  */
-function getSelectButtens (input){
-	let data = input.Style;
-	let div = elementWithOneAttributes('div','id','loopReadModesStyleButtons');
+function getModeButtons (input){
+	let data = input.modes;
+	let div = elementWithOneAttributes('div','id','rmDropdown');
 	for(let i= 0; i <data.length; i++){
 		let button = elementWithThreeAttributes('button','id',  data[i].name,'style', 'background:'+data[i].preViewBackground+'; color:'+ data[i].preView, 'class', 'dropdownBtn');
-
-		button.addEventListener('click',()=>{updateStyle(data[i].name)});
+		button.addEventListener('click',()=>{updateMode(data[i].name)});
 		button.innerHTML= data[i].name;
 		div.append(button);
 	}
@@ -104,12 +93,12 @@ function getSelectButtens (input){
  * If the JSON file is empty or an Error happens it just calls build() with ['LOOP'] and the bar with it scaling
  * functionality is build.
  */
- function fetchStyles(url) {
+ function fetchModes(url) {
 	fetch(url)
 		.then(r =>{
 			r.json()
 				.then(r => {
-					if(r.StyleID.length === 0){
+					if(r.length === 0){
 						build(['LOOP']);
 					}else {
 						config = r;
@@ -123,10 +112,13 @@ function getSelectButtens (input){
  * @returns An Div with the three Buttons.
  */
 function getScale() {
-	let wrapper 	= elementWithOneAttributes('div', 'id', 'loopReadModesFont');
+	let wrapper 	= elementWithOneAttributes('div', 'id', 'rmScale');
 	let smallText 	= elementWithTowAttributesAndInnerHTML('button', 'id', 'smallText', 'class', 'rmBtn', 'A-');
 	let normalText 	= elementWithTowAttributesAndInnerHTML('button', 'id', 'normalText', 'class', 'rmBtn', 'A');
 	let largeText 	= elementWithTowAttributesAndInnerHTML('button', 'id', 'largeText', 'class', 'rmBtn', 'A+');
+	smallText.addEventListener('click',  ()=>{textSize--;		changeTextSize(textSize);});
+	normalText.addEventListener('click', ()=>{textSize = 16;	changeTextSize(textSize);});
+	largeText.addEventListener('click',  ()=>{textSize++; 		changeTextSize(textSize);});
 	wrapper.append(smallText);
 	wrapper.append(normalText);
 	wrapper.append(largeText);
@@ -136,49 +128,40 @@ function getScale() {
  * This function takes a Keyword and checks if the keyword appears in the config objekt.
  * If so it takes the URL out of the config objekt and creates link tag with the URL.
  * Before the tag is put in the DOM, it checkt if a custom Style is already in the DOM and remove it.
- * For this reason the id 'LoopReadModesStyleSheet' is used.
- * @param style the chosen style
+ * For this reason the id 'modeURL' is used.
+ * @param modeName the chosen style
  */
-function updateStyle(style) {
-	config.Style.forEach(temp=>{
-		if(style === temp.name){
-			styleURL = mw.config.get( 'wgScriptPath' ) + temp.url;
-			changeP(temp.textSize);
-			//if(!search){
-			//	styleURL = '.'+styleURL;
-			//}
-			let stylesheet = document.createElement('link');
-			stylesheet.setAttribute('rel', 'stylesheet');
-			stylesheet.setAttribute('type', "text/css");
-			stylesheet.setAttribute('href', styleURL);
-			stylesheet.setAttribute('id', 'LoopReadModesStyleSheet');
-			if(!!document.getElementById('LoopReadModesStyleSheet')) {
-				document.getElementById('LoopReadModesStyleSheet').remove();
-			}
+function updateMode(modeName) {
+	config.modes.forEach(temp=>{
+		if(modeName === temp.name){
+			modeURL = mw.config.get( 'wgScriptPath' ) + temp.url;
+			let stylesheet = elementWithFourAttributes('link', 'rel', 'stylesheet', 'type', 'text/css', 'href', modeURL, 'id', 'modeURL');
+			(document.getElementById('modeURL'))? document.getElementById('modeURL').remove():false;
+			(document.getElementById('rmOpen'))? removeElementByID('rmDropdown'):false;
+			(document.getElementById('rmOpen'))? document.getElementById('rmOpen').setAttribute('id', 'rmClose'):false;
 			document.getElementsByTagName('head')[0].append(stylesheet);
-			document.cookie = "style="+ style+"; SameSite=None; Secure";
-			document.getElementById('loopReadModesStyleButtonOpen').setAttribute('id','loopReadModesStyleButtonClose');
-			removeElementByID('loopReadModesStyleButtons');
+			changeTextSize(temp.textSize);
+			document.cookie = "mode="+ modeName+"; SameSite=None; Secure";
 		}
 	});
 }
 /**
  * This function change the font-size of all p, li, th, td, caption tags to a given px number.
  * The given number is saved in a cookie called 'textSize'.
- * @param pSize the px size of the p, li, th, caption and td.
+ * @param size the px size of the p, li, th, caption and td.
  */
-function changeP(pSize) {
-	document.cookie="textSize="+pSize +"; SameSite=None; Secure";
+function changeTextSize(size) {
+	document.cookie="textSize="+size +"; SameSite=None; Secure";
 	let pElement = document.getElementsByTagName('p');
 	let liElement = document.getElementsByTagName('li');
 	let thElement = document.getElementsByTagName('th');
 	let tdElement = document.getElementsByTagName('td');
 	let captionElement = document.getElementsByTagName('caption');
-	loop(pElement, pElement.length-3,pSize);
-	loop(liElement, liElement.length,pSize)
-	loop(thElement, thElement.length,pSize);
-	loop(tdElement, tdElement.length,pSize);
-	loop(captionElement, captionElement.length,pSize);
+	loop(pElement, pElement.length-3,size); //
+	loop(liElement, liElement.length,size)
+	loop(thElement, thElement.length,size);
+	loop(tdElement, tdElement.length,size);
+	loop(captionElement, captionElement.length,size);
 }
 /**
  * This function is a for loop that goes over an Array of html elements and set an inline Style 'font-size'.
@@ -192,28 +175,8 @@ function loop(array, workLength, size){
 		for (let i=0;i < workLength;i++) {
 			array[i].setAttribute('style', 'font-size:'+size+'px!important;');
 		}
-	}else if(array >0) {
+	}else if(array.length > 0) {
 		array.setAttribute('style', 'font-size:'+size+'px!important;');
-	}
-}
-/**
- * This function puts the events on the element of the ReadModesBar. todo
- */
-function addListener() {
-	let smallText = document.getElementById('smallText');
-	smallText.onclick = (event) =>{
-		textSize--;
-		changeP(textSize);
-	}
-	let normalText = document.getElementById('normalText');
-	normalText.onclick = (event) =>{
-		textSize = 16;
-		changeP(textSize);
-	}
-	let largeText = document.getElementById('largeText');
-	largeText.onclick = (event) =>{
-		textSize++;
-		changeP(textSize);
 	}
 }
 /**
@@ -226,21 +189,6 @@ function addListener() {
 function  elementWithOneAttributes(tag, attribut, value,){
 	let t = document.createElement(tag);
 	t.setAttribute(attribut, value);
-	return t;
-}
-/**
- * This function creates and returns an DOM-Element after given parameters.
- * @param tag Type of the Dom-Element
- * @param attribut1 name of the attribut1
- * @param value1 value of the attribut1
- * @param attribut2 name of the attribut2
- * @param value2 value of the attribut2
- * @returns {*} the DOM-Element
- */
-function  elementWithTowAttributes(tag, attribut1, value1,attribut2, value2){
-	let t = document.createElement(tag);
-	t.setAttribute(attribut1, value1);
-	t.setAttribute(attribut2, value2);
 	return t;
 }
 /**
@@ -279,14 +227,27 @@ function elementWithThreeAttributes(tag, attribut1, value1,attribut2, value2,att
 	return t;
 }
 /**
+ * This function creates and returns an DOM-Element after given parameters.
+ * @param tag Type of the Dom-Element
+ * @param attribut1 name of the attribut1
+ * @param value1 value of the attribut1
+ * @param attribut2 name of the attribut2
+ * @param value2 value of the attribut2
+ * @param attribut3 name of the attribut3
+ * @param value3 value of the attribut3
+ * @param attribut4 name of the attribut4
+ * @param value4 value of the attribut4
+ * @returns {*} the DOM-Element
+ */
+function elementWithFourAttributes(tag, attribut1, value1,attribut2, value2,attribut3, value3, attribut4, value4) {
+	let t = document.createElement(tag);
+	t.setAttribute(attribut1, value1,);
+	t.setAttribute(attribut2, value2);
+	t.setAttribute(attribut3, value3);
+	t.setAttribute(attribut4, value4);
+	return t;
+}
+/**
  * That is the first function how get called after the file is fetch in the Client.
  */
-(()=>{
-	//if(!window.location.href.split('?')[1]){
-	// search = false;
-	//fetchStyles('.'+configURL);}
-	//else {
-	//	search = true;
-		fetchStyles(configURL);
-	//}
-})();
+(()=>{fetchModes(configURL);})();
