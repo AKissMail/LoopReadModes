@@ -7,37 +7,63 @@
 /*import for the used Font*/
 @import url('fonts/fonts.css');
 
+/** The basic parameters  for the Bar.
+	--main-bg-color: Background color for the LoopReadModes Bar.
+	--main-bg-secondary-color: Background color for the LoopReadModes Bar.
+	--main-height: The height of the Bar. Need to be adjusted if you use lage fonts (28 pt+).
+	--background-color: Background color for the Text area.
+	--background-color-secondary: Background color for the pseudo-classes and secondary areas.
+	--border-top-color: Color of the top border.
+	--font-color: Color of the Font.
+	--font-color-link: Color of the Links.
+	--font: Setting for the Font.
+	--iconColor: Color setting for the System Icon.
+	--rmBtn-width: The width of the Modes Button. If you see an overflow, increase this number.
+*/
   :root{
 	--main-bg-color: #EDD1B0;
 	--main-bg-secondary-color: #b48c79;
 	--main-height: 45px;
 	--background-color: #EDD1B0;
 	--background-color-secondary: #b48c79;
-	--border-top-color: black;
-	--font-color: black;
-	--font-color-link: black;
+	--border-top-color: #000000;
+	--font-color: #000000;
+	--font-color-link: #000000;
 	--font: 'Courier Prime', monospace;
 	--iconColor:#000000!important;
+	--rmBtn-width: 80px;
 }
-/*Color*/
+/*------------------------------------------------- Color -------------------------------------------------*/
+/*Color setting for the background*/
 body , #page-content, #content-inner-wrapper, .form-control{
 	background:var(--background-color)!important;
 }
+/*Color setting for the sidebar*/
 .panel-wrapper, #main-footer, #page-navigation-wrapper{
 	background-color: var(--background-color-secondary)!important;
 }
+/*Color setting for the sidebar (top border)*/
 #sidebar-wrapper .panel-heading, #export-panel .panel-heading{
 	border-top: 3px solid var(--border-top-color)!important;
 }
+/*removing a shadow in the sidebar*/
 .toc-tree li a::after{
 	background:none!important;
 }
+/*adding a shadow in the sidebar*/
 #toc-nav {
 	-webkit-box-shadow: 0 5px 5px -4px var(--border-top-color) !important;
 	-moz-box-shadow: 0 5px 5px -4px var(--border-top-color) !important;
 	box-shadow: 0 5px 5px -4px var(--border-top-color) !important;
 }
-/* Buttons */
+/*setting for the background-color in the search result screen*/
+.mw-search-profile-tabs {
+	background-color: var(--background-color)!important;
+	margin-top: 0!important;
+	border: none!important;
+	border-radius: 0!important;
+}
+/*------------------------------------------------- Buttons -------------------------------------------------*/
 .btn-light.disabled, .btn-light[disabled], fieldset[disabled] .btn-light, .btn, .btn-light ,.page-nav-btn{
 	background-color: var(--background-color-secondary)!important;
 }
@@ -47,84 +73,68 @@ body , #page-content, #content-inner-wrapper, .form-control{
 .rmBtn{
 	color: var(--font-color)!important;
 }
+.oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-flaggedElement-primary.oo-ui-flaggedElement-progressive > .oo-ui-buttonElement-button,
+.oo-ui-checkboxInputWidget.oo-ui-widget-enabled [type="checkbox"]:checked + span, .mw-ui-button.mw-ui-progressive{
+	color: var(--font-color)!important;
+	background-color: var(--background-color-secondary)!important;
+	border-color: var(--font-color)!important;
+}
+#rmBar >div > select:hover, #rmBar >div > select:focus {
+	background-color: var(--main-bg-secondary-color);
+}
+#smallText, #normalText, #largeText{
+	color: var(--iconColor)!important;
+}
 
-/* Typo */
+/*with of the Modes button */
+#rmModes, #rmClose, #rmOpen{
+	width:var(--rmBtn-width);
+}
+/*------------------------------------------------- Typography -------------------------------------------------*/
+/*color setting*/
 h1, h2, h3, h4, h5, h6, p, .form-control::placeholder, .panel-title,.btn, .page-symbol {
 	color: var(--font-color)!important;
 }
+/*font setting*/
 h1, h2, h3, h4, h5, h6, p, .form-control::placeholder, .panel-title,.btn{
 	font-family:var(--font)!important;
 }
+/*color setting for the links*/
 a, #main-footer{
 	color: var(--font-color-link)!important;
 	text-decoration: underline !important;
 }
-#smallText, #normalText, #largeText{
-	color: var(--iconColor)!important;
-	font-size: 25px;
-}
+/*spacing of the font - do not add font-size!*/
 p{
 	letter-spacing: 2px;
 	line-height:1.4em;
 }
-
-/**/
-#loopReadModesBar{
-	background:var(--main-bg-color);
-	width:100%;
-	height:var(--main-height);
-	display:flex;
-	justify-content:flex-end
-}
-
-#loopReadModesBar >div > select {
-	background-color: var(--main-bg-color);
-	height: var(--main-height);
-	color: #000000;
-	font-size: 25px;
-	border: none;
-	-webkit-appearance: button;
-	outline: none;
-}
-#loopReadModesBar >div > select:hover, #loopReadModesBar >div > select:focus {
-	background-color: var(--main-bg-secondary-color);
-}
-
-#loopReadModesFont {
-	display: flex;
-	justify-content:center;
-}
-#loopReadModesFont > button {
-	background-color: var(--main-bg-color);;
-	border: none;
-	width:	var(--main-height);
-	height: var(--main-height);
-}
-#loopReadModesFont > button:hover,#loopReadModesFont > button:focus  {
-	background-color: var(--main-bg-secondary-color);
-}
-#Ebene_1{
-	color: #000000 !important;
-}
-.wikitable > tr > th, .wikitable > * > tr > th{
-	background-color: var(--main-bg-secondary-color)!important;
-}
-.wikitable > tr > th, .wikitable > tr > td, .wikitable > * > tr > th, .wikitable > * > tr > td{
-	border: 1px solid #000000;
-	background-color:var(--background-color);
-}
+/*color setting for the caption element */
 caption{
 	color:var(--font-color)!important;
 }
-.oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-flaggedElement-primary.oo-ui-flaggedElement-progressive > .oo-ui-buttonElement-button,
-.oo-ui-checkboxInputWidget.oo-ui-widget-enabled [type="checkbox"]:checked + span, .mw-ui-button.mw-ui-progressive{
-	color: var(--font-color)!important;
-	background-color: var(--main-bg-secondary-color)!important;
-	border-color: var(--font-color)!important;
+/*------------------------------------------------- loopReadModesBar -------------------------------------------------*/
+/*background-color for the Bar*/
+#rmBar{
+	background:var(--main-bg-color);
+	height:var(--main-height);
 }
-.mw-search-profile-tabs {
-	background-color: var(--main-bg-color)!important;
-	margin-top: 0!important;
-	border: none!important;
-	border-radius: 0!important;
+/*setting for the button that changes the font-size (A-,A, A+)*/
+#rmScale > button {
+	background-color: var(--main-bg-color);;
+	width:	var(--main-height);
+	height: var(--main-height);
+}
+/*pseudo-class setting for the button that changes the font-size (A-,A, A+) */
+#rmScale > button:hover,#rmScale > button:focus  {
+	background-color: var(--main-bg-secondary-color);
+}
+/*setting for the Tables*/
+.wikitable > tr > th, .wikitable > * > tr > th{
+	background-color: var(--background-color-secondary)!important;
+}
+/*setting for the Tables*/
+.wikitable > tr > th, .wikitable > tr > td, .wikitable > * > tr > th, .wikitable > * > tr > td{
+	border: 1px solid #000000;
+	background-color:var(--background-color);
 }
