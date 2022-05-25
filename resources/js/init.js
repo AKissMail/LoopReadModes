@@ -1,11 +1,18 @@
 /**
+ * This script puts an additional bar on top of a loop system.
  * @author Andreas Kißmehl
+ * @version 1.0
+ * @param config Global variable for the Config object after it is fetched from the Server.
+ * @param modesURL The URI of the current Stylesheet
+ * @currentMode The Current Style
+ * @textSize The current TextSize
+ * @configURL  URI of the Configuration file
  */
-let 	config; 										// Global variable for the Config object after it is fetched from the Server.
-let 	modeURL;										// The URI of the current Stylesheet
-let 	currentMode = getCookie("mode");	// the Current Style.
-let 	textSize = getCookie("textSize");	// The current TextSize
-const 	configURL=  mw.config.get( 'wgServer' ) + "/" + mw.config.get( 'wgScriptPath' ) + "/extensions/LoopReadModes/modes/modes.json"; // URI of the Configuration file.
+let 	config;
+let 	modeURL;
+let 	currentMode = getCookie("mode");
+let 	textSize = getCookie("textSize");
+const 	configURL=  mw.config.get( 'wgServer' ) + "/" + mw.config.get( 'wgScriptPath' ) + "/extensions/LoopReadModes/modes/modes.json";
 /**
  * That function checks if a Cookie is already set with a preferred style and return that name of the style.
  * If the function fond nothing the sting '' is returned.
@@ -30,14 +37,12 @@ function getCookie(cookieName) {
  * This function set up the menubar and put it in the dom.
  */
 function build() {
-	console.log(config);
 	let barWrapper = elementWithOneAttributes('div', 'id','rmBar');
 	let typoScale = getScale();
 	let modes = getSelect();
 	barWrapper.append(typoScale);
 	barWrapper.append(modes);
 	document.getElementById('banner-logo-container').append(barWrapper);
-
 	(currentMode)? updateMode(currentMode):false;
 	(textSize) ? changeTextSize(textSize): false;
 	(!textSize) ? textSize = 16: false;
