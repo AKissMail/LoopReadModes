@@ -63,6 +63,24 @@ body , #page-content, #content-inner-wrapper, .form-control{
 	border: none!important;
 	border-radius: 0!important;
 }
+/*setting for the quotes*/
+span.ic, .looparea-left-type{
+	color: var(--font-color)!important;
+}
+.looparea-left {
+	border-right: 3px solid  var(--font-color) !important; ;
+
+}
+.looparea-right{
+	background:var(--background-color-secondary)!important;
+}
+/*setting for the spoiler text */
+.loopspoiler_default_content, .loopspoiler_transparent_content {
+	background: var(--background-color-secondary);
+	border: 2px solid var(--font-color) ;
+
+}
+
 /*------------------------------------------------- Buttons -------------------------------------------------*/
 .btn-light.disabled, .btn-light[disabled], fieldset[disabled] .btn-light, .btn, .btn-light ,.page-nav-btn{
 	background-color: var(--background-color-secondary)!important;
@@ -89,6 +107,22 @@ body , #page-content, #content-inner-wrapper, .form-control{
 /*with of the Modes button */
 #rmModes, #rmClose, #rmOpen{
 	width:var(--rmBtn-width);
+}
+.btn.loopspoiler {
+	border: var(--font-color)!important;
+	color: var(--font-color)!important;
+	font-weight: 400;
+	padding: 10px;
+	margin: 0 0 10px;
+	line-height: 1.3rem;
+	font-size: 1.2rem;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+
+}
+
+.loopspoiler:hover, .loopspoiler:focus {
+	text-decoration: underline;
 }
 /*------------------------------------------------- Typography -------------------------------------------------*/
 /*color setting*/
