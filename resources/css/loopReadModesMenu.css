@@ -2,7 +2,7 @@
  This file is part of the Extension and contains the CCS rules for the LoopReadModes menu bar and buttons.
  @author Andreas Kißmehl
  */
-
+@import url("../../extensions/LoopReadModes/resources/css/fonts/fonts.css");
 /** The basic parameters  for the Bar.
 	--main-bg-color: Background-color for the Bar.
 	--main-bg-secondary-color: Background-color for the Bar if :hover or focus is active.
@@ -16,27 +16,30 @@
 	--main-height: 45px;
 	--iconColor: #ffffff;
 	--font-size: 25px;
+	--button-border: none;
+	--button-hover: underline;
 }
 /*-------------------------------- classes -------------------------------- */
 /* This are the parameters for the menubar*/
 .rmBtn {
 	background-color: var(--main-bg-color);
-	border: none;
+	border: var(--button-border);
 	width:	var(--main-height);
 	height: var(--main-height);
 	color: var(--iconColor);
 	font-size:var(--font-size);
+	/*font-family: 'Material Symbols Outlined';*/
 }
 
 /* This are the parameters for the Dropdown buttons */
 .dropdownBtn{
-	border: none;
+	border: var(--button-border);
 	height: var(--main-height);
 	font-size:var(--font-size);
 }
 /* This are the parameters for the dropdown buttons css pseudo-classes */
 .dropdownBtn:hover,  .dropdownBtn:focus {
-	text-decoration: underline;
+	text-decoration: var(--button-hover);
 }
 /* This are the parameters for the buttons css pseudo-classes */
 .rmBtn:hover,.rmBtn:focus {
@@ -53,7 +56,7 @@
 }
 /* this is the setting of the width for the Buttons that select the Mode*/
 #rmModes, #rmClose, #rmOpen{
-	width:80px;
+	width:100px;
 }
 /* this are the setting of scaling buttons */
 #rmScale {

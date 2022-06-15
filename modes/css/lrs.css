@@ -30,10 +30,14 @@
 	--font-color: #000000;
 	--font-color-link: #000000;
 	--font: 'Courier Prime', monospace;
-	--iconColor:#000000!important;
-	--rmBtn-width: 80px;
+	--font-text-decoration: underline;
+	--font-letter-spacing: 2px;
+	--font-line-height:1.4em;
+	--iconColor:#000000;
+	--tabels-border: 1px solid #000000;
+
 }
-/*------------------------------------------------- Color -------------------------------------------------*/
+/*------------------------------------------------- Color ------------------------------------------------------------*/
 /*Color setting for the background*/
 body , #page-content, #content-inner-wrapper, .form-control{
 	background:var(--background-color)!important;
@@ -81,12 +85,12 @@ span.ic, .looparea-left-type{
 
 }
 
-/*------------------------------------------------- Buttons -------------------------------------------------*/
+/*------------------------------------------------- Buttons .........-------------------------------------------------*/
 .btn-light.disabled, .btn-light[disabled], fieldset[disabled] .btn-light, .btn, .btn-light ,.page-nav-btn{
 	background-color: var(--background-color-secondary)!important;
 }
 #user-menu-dropdown{
-	background-color:#f8f9fa!important;
+	background-color: #f5f5f5 !important;
 }
 .rmBtn{
 	color: var(--font-color)!important;
@@ -104,27 +108,23 @@ span.ic, .looparea-left-type{
 	color: var(--iconColor)!important;
 }
 
-/*with of the Modes button */
-#rmModes, #rmClose, #rmOpen{
-	width:var(--rmBtn-width);
-}
+/*settings for the Spoiler element */
 .btn.loopspoiler {
 	border: var(--font-color)!important;
 	color: var(--font-color)!important;
 	font-weight: 400;
 	padding: 10px;
 	margin: 0 0 10px;
-	line-height: 1.3rem;
+	line-height: var(--font-line-height);
 	font-size: 1.2rem;
 	text-transform: uppercase;
-	letter-spacing: 2px;
-
+	letter-spacing: var(--font-letter-spacing);
 }
-
+/*settings for the Spoiler element */
 .loopspoiler:hover, .loopspoiler:focus {
-	text-decoration: underline;
+	text-decoration:var(--font-text-decoration);
 }
-/*------------------------------------------------- Typography -------------------------------------------------*/
+/*------------------------------------------------- Typography -------------------------------------------------------*/
 /*color setting*/
 h1, h2, h3, h4, h5, h6, p, .form-control::placeholder, .panel-title,.btn, .page-symbol {
 	color: var(--font-color)!important;
@@ -136,12 +136,12 @@ h1, h2, h3, h4, h5, h6, p, .form-control::placeholder, .panel-title,.btn{
 /*color setting for the links*/
 a, #main-footer{
 	color: var(--font-color-link)!important;
-	text-decoration: underline !important;
+	text-decoration: var(--font-text-decoration)!important;
 }
 /*spacing of the font - do not add font-size!*/
 p{
-	letter-spacing: 2px;
-	line-height:1.4em;
+	letter-spacing: var(--font-letter-spacing);
+	line-height:var(--font-line-height);
 }
 /*color setting for the caption element */
 caption{
@@ -163,12 +163,13 @@ caption{
 #rmScale > button:hover,#rmScale > button:focus  {
 	background-color: var(--main-bg-secondary-color);
 }
+/*------------------------------------------------- Tables -----------------------------------------------------------*/
 /*setting for the Tables*/
 .wikitable > tr > th, .wikitable > * > tr > th{
 	background-color: var(--background-color-secondary)!important;
 }
 /*setting for the Tables*/
 .wikitable > tr > th, .wikitable > tr > td, .wikitable > * > tr > th, .wikitable > * > tr > td{
-	border: 1px solid #000000;
+	border: var(--tabels-border);
 	background-color:var(--background-color);
 }

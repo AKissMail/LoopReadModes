@@ -1,18 +1,18 @@
 {
-    "modes" : [
-        {
-            "name": "LOOP",
-            "url": "",
+	"modes" : [
+		{
+			"name": "LOOP",
+			"url": "",
 			"textSize": 16,
-            "preViewBackground": "#526ca2",
-            "preView": "#ffffff"
-        },
-        {
-            "name": "LRS",
-            "url": "/extensions/LoopReadModes/modes/css/lrs.css",
-            "textSize": 26,
-            "preViewBackground": "#EDD1B0",
-            "preView": "#000000"
-        }
-    ]
+			"preViewBackground": "#526ca2",
+			"preView": "#ffffff"
+		},
+		{
+			"name": "Dyslexia",
+			"url": "/extensions/LoopReadModes/modes/css/lrs.css",
+			"textSize": 22,
+			"preViewBackground": "#EDD1B0",
+			"preView": "#000000"
+		}
+	]
 }

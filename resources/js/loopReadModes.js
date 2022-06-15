@@ -12,6 +12,9 @@ let 	config;
 let 	modeURL;
 let 	currentMode = getCookie("mode");
 let 	textSize = getCookie("textSize");
+let 	normalTextSize = 16;
+let 	textSizeChange = (getCookie(textSize) !== "textSizeChange");
+const 	server = mw.config.get( 'wgServer')+"/" + mw.config.get( 'wgScriptPath' );
 const 	configURL=  mw.config.get( 'wgServer' ) + "/" + mw.config.get( 'wgScriptPath' ) + "/extensions/LoopReadModes/modes/modes.json";
 /**
  * That function checks if a Cookie is already set with a preferred style and return that name of the style.
@@ -37,15 +40,23 @@ function getCookie(cookieName) {
  * This function set up the menubar and put it in the dom.
  */
 function build() {
+	console.log(config);
+	console.log(modeURL);
+	console.log(currentMode);
+	console.log(textSize);
+	console.log(textSizeChange);
+	console.log(server);
+	console.log(configURL);
 	let barWrapper = elementWithOneAttributes('div', 'id','rmBar');
-	let typoScale = getScale();
-	let modes = getSelect();
-	barWrapper.append(typoScale);
-	barWrapper.append(modes);
+	barWrapper.append(getScale());
+	barWrapper.append(getSelect());
 	document.getElementById('banner-logo-container').append(barWrapper);
-	(currentMode)? updateMode(currentMode):false;
-	(textSize) ? changeTextSize(textSize): false;
-	(!textSize) ? textSize = 16: false;
+	(currentMode)?console.log('currentMode true'):false;
+	console.log(currentMode);
+	(currentMode)? updateMode(currentMode):console.log('currentMode false');
+	(textSize) ? changeTextSize(textSize):console.log('changeTextSize false');
+	(textSize) ?console.log('changeTextSize true'):false;
+	(!textSize) ? textSize = 16:console.log('textSize 16 false');
 }
 /**
  * This function creates a Button in a Div and Set an EventListener.
@@ -53,7 +64,7 @@ function build() {
  */
 function getSelect(){
 	let div = elementWithOneAttributes('div', 'id', 'rmModes');
-	let button = elementWithTowAttributesAndInnerHTML('button','id', 'rmClose', 'class', 'rmBtn','Modes');
+	let button = elementWithTowAttributesAndInnerHTML('button','id', 'rmClose', 'class', 'rmBtn material-icons','style');
 	button.addEventListener('click', selectDropDown);
 	div.append(button);
 	return div;
@@ -98,14 +109,16 @@ function getModeButtons (input){
  * If the JSON file is empty or an Error happens it just calls build() with ['LOOP'] and the bar with it scaling
  * functionality is build.
  */
- function fetchModes(url) {
+function fetchModes(url,) {
 	fetch(url)
 		.then(r =>{
 			r.json()
 				.then(r => {
 					if(r.length === 0){
+						console.log('LOOP');
 						build(['LOOP']);
 					}else {
+						console.log(config);
 						config = r;
 						build(r);
 					}
@@ -121,9 +134,9 @@ function getScale() {
 	let smallText 	= elementWithTowAttributesAndInnerHTML('button', 'id', 'smallText', 'class', 'rmBtn', 'A-');
 	let normalText 	= elementWithTowAttributesAndInnerHTML('button', 'id', 'normalText', 'class', 'rmBtn', 'A');
 	let largeText 	= elementWithTowAttributesAndInnerHTML('button', 'id', 'largeText', 'class', 'rmBtn', 'A+');
-	smallText.addEventListener('click',  ()=>{textSize--;		changeTextSize(textSize);});
-	normalText.addEventListener('click', ()=>{textSize = 16;	changeTextSize(textSize);});
-	largeText.addEventListener('click',  ()=>{textSize++; 		changeTextSize(textSize);});
+	smallText.addEventListener('click',  ()=>{textSize--;    textSizeChange = true;		changeTextSize(textSize);});
+	normalText.addEventListener('click', ()=>{textSize = normalTextSize; textSizeChange = false;	changeTextSize(textSize);});
+	largeText.addEventListener('click',  ()=>{textSize++;  	 textSizeChange = true;		changeTextSize(textSize);});
 	wrapper.append(smallText);
 	wrapper.append(normalText);
 	wrapper.append(largeText);
@@ -139,13 +152,14 @@ function getScale() {
 function updateMode(modeName) {
 	config.modes.forEach(temp=>{
 		if(modeName === temp.name){
-			modeURL = mw.config.get( 'wgScriptPath' ) + temp.url;
+			normalTextSize = temp.textSize;
+			modeURL = server + temp.url;
 			let stylesheet = elementWithFourAttributes('link', 'rel', 'stylesheet', 'type', 'text/css', 'href', modeURL, 'id', 'modeURL');
 			(document.getElementById('modeURL'))? document.getElementById('modeURL').remove():false;
 			(document.getElementById('rmOpen'))? removeElementByID('rmDropdown'):false;
 			(document.getElementById('rmOpen'))? document.getElementById('rmOpen').setAttribute('id', 'rmClose'):false;
 			document.getElementsByTagName('head')[0].append(stylesheet);
-			changeTextSize(temp.textSize);
+			(!textSize)?changeTextSize(temp.textSize):false;
 			document.cookie = "mode="+ modeName+"; SameSite=None; Secure";
 		}
 	});
@@ -162,11 +176,16 @@ function changeTextSize(size) {
 	let thElement = document.getElementsByTagName('th');
 	let tdElement = document.getElementsByTagName('td');
 	let captionElement = document.getElementsByTagName('caption');
-	loop(pElement, pElement.length-3,size); //
+	loop(pElement, calculateSize(pElement.length),size);
 	loop(liElement, liElement.length,size)
 	loop(thElement, thElement.length,size);
 	loop(tdElement, tdElement.length,size);
 	loop(captionElement, captionElement.length,size);
+
+	function calculateSize(length) {
+		if(length ===1||2||3){return 1}
+		else{return length-4}
+	}
 }
 /**
  * This function is a for loop that goes over an Array of html elements and set an inline Style 'font-size'.
@@ -178,10 +197,10 @@ function changeTextSize(size) {
 function loop(array, workLength, size){
 	if(workLength){
 		for (let i=0;i < workLength;i++) {
-			array[i].setAttribute('style', 'font-size:'+size+'px!important;');
+			array[i].setAttribute('style', 'font-size:'+size+'px;');
 		}
 	}else if(array.length > 0) {
-		array.setAttribute('style', 'font-size:'+size+'px!important;');
+		array.setAttribute('style', 'font-size:'+size+'px;');
 	}
 }
 /**
@@ -191,7 +210,7 @@ function loop(array, workLength, size){
  * @param value value of the attribut
  * @returns {*} the dom element
  */
-function  elementWithOneAttributes(tag, attribut, value,){
+function elementWithOneAttributes(tag, attribut, value,){
 	let t = document.createElement(tag);
 	t.setAttribute(attribut, value);
 	return t;
@@ -255,4 +274,6 @@ function elementWithFourAttributes(tag, attribut1, value1,attribut2, value2,attr
 /**
  * That is the first function how get called after the file is fetch in the Client.
  */
-(()=>{fetchModes(configURL);})();
+(()=>{
+	fetchModes(configURL);
+})();

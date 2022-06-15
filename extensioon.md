@@ -71,7 +71,7 @@ That is the definition of modules that can be access by a hook. A CSS file and a
 		},
 		"extension.LoopReadModes.js": {
 			"position": "bottom",
-			"scripts": ["/resources/js/init.js"],
+			"scripts": ["/resources/js/loopReadModes.js"],
 			"messages": []
 		}
 	}

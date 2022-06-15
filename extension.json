@@ -44,7 +44,7 @@
     "extension.LoopReadModes.js": {
       "position": "bottom",
       "scripts": [
-		  "/resources/js/init.js"
+		  "/resources/js/loopReadModes.js"
 	  ],
       "messages": [
       ]
