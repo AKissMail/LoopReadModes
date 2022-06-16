@@ -20,46 +20,58 @@
 	--iconColor: Color setting for the System Icon.
 	--rmBtn-width: The width of the Modes Button. If you see an overflow, increase this number.
 */
-  :root{
-	--main-bg-color: #EDD1B0;
+  :root {
+	--main-bg-color: #edd1b0;
 	--main-bg-secondary-color: #b48c79;
 	--main-height: 45px;
-	--background-color: #EDD1B0;
+	--background-color: #edd1b0;
 	--background-color-secondary: #b48c79;
-	--border-top-color: #000000;
-	--font-color: #000000;
-	--font-color-link: #000000;
+	--border-top-color: #000;
+	--font-color: #000;
+	--font-color-link: #000;
 	--font: 'Courier Prime', monospace;
 	--font-text-decoration: underline;
 	--font-letter-spacing: 2px;
 	--font-line-height:1.4em;
-	--iconColor:#000000;
-	--tabels-border: 1px solid #000000;
+	--iconColor:#000;
+	--tabels-border: 1px solid #000;
 
 }
+
 /*------------------------------------------------- Color ------------------------------------------------------------*/
 /*Color setting for the background*/
-body , #page-content, #content-inner-wrapper, .form-control{
-	background:var(--background-color)!important;
+body,
+#page-content,
+#content-inner-wrapper,
+.form-control {
+	background: var(--background-color)!important;
 }
+
 /*Color setting for the sidebar*/
-.panel-wrapper, #main-footer, #page-navigation-wrapper{
+.panel-wrapper,
+#main-footer,
+#page-navigation-wrapper {
 	background-color: var(--background-color-secondary)!important;
 }
+
 /*Color setting for the sidebar (top border)*/
-#sidebar-wrapper .panel-heading, #export-panel .panel-heading{
+#sidebar-wrapper .panel-heading,
+#export-panel .panel-heading {
 	border-top: 3px solid var(--border-top-color)!important;
 }
+
 /*removing a shadow in the sidebar*/
 .toc-tree li a::after{
-	background:none!important;
+	background: none!important;
 }
+
 /*adding a shadow in the sidebar*/
 #toc-nav {
 	-webkit-box-shadow: 0 5px 5px -4px var(--border-top-color) !important;
 	-moz-box-shadow: 0 5px 5px -4px var(--border-top-color) !important;
 	box-shadow: 0 5px 5px -4px var(--border-top-color) !important;
 }
+
 /*setting for the background-color in the search result screen*/
 .mw-search-profile-tabs {
 	background-color: var(--background-color)!important;
@@ -67,44 +79,62 @@ body , #page-content, #content-inner-wrapper, .form-control{
 	border: none!important;
 	border-radius: 0!important;
 }
+
 /*setting for the quotes*/
-span.ic, .looparea-left-type{
+span.ic,
+.looparea-left-type {
 	color: var(--font-color)!important;
 }
+
 .looparea-left {
 	border-right: 3px solid  var(--font-color) !important; ;
+}
 
+.looparea-right {
+	background: var(--background-color-secondary)!important;
 }
-.looparea-right{
-	background:var(--background-color-secondary)!important;
-}
+
 /*setting for the spoiler text */
-.loopspoiler_default_content, .loopspoiler_transparent_content {
+.loopspoiler_default_content,
+.loopspoiler_transparent_content {
 	background: var(--background-color-secondary);
 	border: 2px solid var(--font-color) ;
 
 }
 
 /*------------------------------------------------- Buttons .........-------------------------------------------------*/
-.btn-light.disabled, .btn-light[disabled], fieldset[disabled] .btn-light, .btn, .btn-light ,.page-nav-btn{
+.btn-light.disabled,
+.btn-light[disabled],
+fieldset[disabled] .btn-light,
+.btn,
+.btn-light,
+.page-nav-btn {
 	background-color: var(--background-color-secondary)!important;
 }
-#user-menu-dropdown{
+
+#user-menu-dropdown {
 	background-color: #f5f5f5 !important;
 }
-.rmBtn{
+
+.rmBtn {
 	color: var(--font-color)!important;
 }
+
 .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-flaggedElement-primary.oo-ui-flaggedElement-progressive > .oo-ui-buttonElement-button,
-.oo-ui-checkboxInputWidget.oo-ui-widget-enabled [type="checkbox"]:checked + span, .mw-ui-button.mw-ui-progressive{
+.oo-ui-checkboxInputWidget.oo-ui-widget-enabled [type="checkbox"]:checked + span,
+.mw-ui-button.mw-ui-progressive {
 	color: var(--font-color)!important;
 	background-color: var(--background-color-secondary)!important;
 	border-color: var(--font-color)!important;
 }
-#rmBar >div > select:hover, #rmBar >div > select:focus {
+#rmBar >div > select:hover,
+#rmBar >div > select:focus {
 	background-color: var(--main-bg-secondary-color);
 }
-#smallText, #normalText, #largeText{
+
+#smallText,
+#normalText,
+#largeText {
 	color: var(--iconColor)!important;
 }
 
@@ -120,56 +150,93 @@ span.ic, .looparea-left-type{
 	text-transform: uppercase;
 	letter-spacing: var(--font-letter-spacing);
 }
+
 /*settings for the Spoiler element */
-.loopspoiler:hover, .loopspoiler:focus {
-	text-decoration:var(--font-text-decoration);
+.loopspoiler:hover,
+.loopspoiler:focus {
+	text-decoration: var(--font-text-decoration);
 }
+
 /*------------------------------------------------- Typography -------------------------------------------------------*/
 /*color setting*/
-h1, h2, h3, h4, h5, h6, p, .form-control::placeholder, .panel-title,.btn, .page-symbol {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+.form-control::placeholder,
+.panel-title,
+.btn,
+.page-symbol {
 	color: var(--font-color)!important;
 }
+
 /*font setting*/
-h1, h2, h3, h4, h5, h6, p, .form-control::placeholder, .panel-title,.btn{
-	font-family:var(--font)!important;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+.form-control::placeholder,
+.panel-title,
+.btn {
+	font-family: var(--font)!important;
 }
+
 /*color setting for the links*/
-a, #main-footer{
+a,
+#main-footer {
 	color: var(--font-color-link)!important;
 	text-decoration: var(--font-text-decoration)!important;
 }
+
 /*spacing of the font - do not add font-size!*/
-p{
+p {
 	letter-spacing: var(--font-letter-spacing);
-	line-height:var(--font-line-height);
+	line-height: var(--font-line-height);
 }
+
 /*color setting for the caption element */
-caption{
-	color:var(--font-color)!important;
+caption {
+	color: var(--font-color)!important;
 }
+
 /*------------------------------------------------- loopReadModesBar -------------------------------------------------*/
 /*background-color for the Bar*/
-#rmBar{
-	background:var(--main-bg-color);
-	height:var(--main-height);
+#rmBar {
+	background: var(--main-bg-color);
+	height: var(--main-height);
 }
+
 /*setting for the button that changes the font-size (A-,A, A+)*/
 #rmScale > button {
 	background-color: var(--main-bg-color);;
-	width:	var(--main-height);
+	width: var(--main-height);
 	height: var(--main-height);
 }
+
 /*pseudo-class setting for the button that changes the font-size (A-,A, A+) */
-#rmScale > button:hover,#rmScale > button:focus  {
+#rmScale > button:hover,
+#rmScale > button:focus  {
 	background-color: var(--main-bg-secondary-color);
 }
+
 /*------------------------------------------------- Tables -----------------------------------------------------------*/
 /*setting for the Tables*/
-.wikitable > tr > th, .wikitable > * > tr > th{
+.wikitable > tr > th,
+.wikitable > * > tr > th {
 	background-color: var(--background-color-secondary)!important;
 }
+
 /*setting for the Tables*/
-.wikitable > tr > th, .wikitable > tr > td, .wikitable > * > tr > th, .wikitable > * > tr > td{
+.wikitable > tr > th,
+.wikitable > tr > td,
+.wikitable > * > tr > th,
+.wikitable > * > tr > td {
 	border: var(--tabels-border);
-	background-color:var(--background-color);
+	background-color: var(--background-color);
 }

@@ -3,6 +3,7 @@
  @author Andreas Kißmehl
  */
 @import url("../../extensions/LoopReadModes/resources/css/fonts/fonts.css");
+
 /** The basic parameters  for the Bar.
 	--main-bg-color: Background-color for the Bar.
 	--main-bg-secondary-color: Background-color for the Bar if :hover or focus is active.
@@ -19,6 +20,7 @@
 	--button-border: none;
 	--button-hover: underline;
 }
+
 /*-------------------------------- classes -------------------------------- */
 /* This are the parameters for the menubar*/
 .rmBtn {
@@ -35,37 +37,45 @@
 .dropdownBtn{
 	border: var(--button-border);
 	height: var(--main-height);
-	font-size:var(--font-size);
+	font-size: var(--font-size);
 }
+
 /* This are the parameters for the dropdown buttons css pseudo-classes */
-.dropdownBtn:hover,  .dropdownBtn:focus {
+.dropdownBtn:hover,
+.dropdownBtn:focus {
 	text-decoration: var(--button-hover);
 }
+
 /* This are the parameters for the buttons css pseudo-classes */
-.rmBtn:hover,.rmBtn:focus {
+.rmBtn:hover,
+.rmBtn:focus {
 	background-color: var(--main-bg-secondary-color);
 }
+
 /*-------------------------------- id -------------------------------- */
 /* This are the parameters for the wrapper div of the LoopReadModesBar */
 #rmBar{
-	background:var(--main-bg-color);
-	width:100%;
-	height:var(--main-height);
-	display:flex;
-	justify-content:flex-end
+	background: var(--main-bg-color);
+	width: 100%;
+	height: var(--main-height);
+	display: flex;
+	justify-content: flex-end
 }
+
 /* this is the setting of the width for the Buttons that select the Mode*/
 #rmModes, #rmClose, #rmOpen{
-	width:100px;
+	width: 100px;
 }
+
 /* this are the setting of scaling buttons */
 #rmScale {
 	display: flex;
-	justify-content:center;
+	justify-content: center;
 }
+
 /* this are the setting of the dropdown buttons */
 #rmDropdown{
-	display:grid;
-	z-index:1;
+	display: grid;
+	z-index: 1;
 	position: relative;
 }
