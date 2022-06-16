@@ -26,9 +26,9 @@ That is an additional Mode.
         {
             "name": "LRS",
             "url": "/extensions/LoopReadModes/modes/css/lrs.css",
-            "textSize": 26,
-            "preViewBackground": "#EDD1B0",
-            "preView": "#black"
+            "textSize": 22,
+            "preViewBackground": "#edd1b0",
+            "preView": "#000"
         }
     ]
 }

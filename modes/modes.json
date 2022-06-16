@@ -5,14 +5,14 @@
 			"url": "",
 			"textSize": 16,
 			"preViewBackground": "#526ca2",
-			"preView": "#ffffff"
+			"preView": "#fff"
 		},
 		{
 			"name": "Dyslexia",
 			"url": "/extensions/LoopReadModes/modes/css/lrs.css",
 			"textSize": 22,
-			"preViewBackground": "#EDD1B0",
-			"preView": "#000000"
+			"preViewBackground": "#edd1b0",
+			"preView": "#000"
 		}
 	]
 }
