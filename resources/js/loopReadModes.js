@@ -64,7 +64,7 @@ function build() {
  */
 function getSelect(){
 	let div = elementWithOneAttributes('div', 'id', 'rmModes');
-	let button = elementWithTowAttributesAndInnerHTML('button','id', 'rmClose', 'class', 'rmBtn material-icons','style');
+	let button = elementWithThreeAttributesAndInnerHTML('button','id', 'rmClose', 'class', 'rmBtn material-icons','title', 'Kontrast Modus auswählen','style');
 	button.addEventListener('click', selectDropDown);
 	div.append(button);
 	return div;
@@ -97,7 +97,7 @@ function getModeButtons (input){
 	let data = input.modes;
 	let div = elementWithOneAttributes('div','id','rmDropdown');
 	for(let i= 0; i <data.length; i++){
-		let button = elementWithThreeAttributes('button','id',  data[i].name,'style', 'background:'+data[i].preViewBackground+'; color:'+ data[i].preView, 'class', 'dropdownBtn');
+		let button = elementWithFourAttributes('button','id',  data[i].name,'style', 'background:'+data[i].preViewBackground+'; color:'+ data[i].preView, 'class', 'dropdownBtn','title', data[i].name);
 		button.addEventListener('click',()=>{updateMode(data[i].name)});
 		button.innerHTML= data[i].name;
 		div.append(button);
@@ -131,9 +131,9 @@ function fetchModes(url,) {
  */
 function getScale() {
 	let wrapper 	= elementWithOneAttributes('div', 'id', 'rmScale');
-	let smallText 	= elementWithTowAttributesAndInnerHTML('button', 'id', 'smallText', 'class', 'rmBtn', 'A-');
-	let normalText 	= elementWithTowAttributesAndInnerHTML('button', 'id', 'normalText', 'class', 'rmBtn', 'A');
-	let largeText 	= elementWithTowAttributesAndInnerHTML('button', 'id', 'largeText', 'class', 'rmBtn', 'A+');
+	let smallText 	= elementWithThreeAttributesAndInnerHTML('button', 'id', 'smallText', 'class', 'rmBtn', 'title', 'Text verkleinern','A-');
+	let normalText 	= elementWithThreeAttributesAndInnerHTML('button', 'id', 'normalText', 'class', 'rmBtn','title', 'Textgröße zurücksetzten', 'A');
+	let largeText 	= elementWithThreeAttributesAndInnerHTML('button', 'id', 'largeText', 'class', 'rmBtn', 'title', 'Text vergrößern','A+');
 	smallText.addEventListener('click',  ()=>{textSize--;    textSizeChange = true;		changeTextSize(textSize);});
 	normalText.addEventListener('click', ()=>{textSize = normalTextSize; textSizeChange = false;	changeTextSize(textSize);});
 	largeText.addEventListener('click',  ()=>{textSize++;  	 textSizeChange = true;		changeTextSize(textSize);});
@@ -222,32 +222,17 @@ function elementWithOneAttributes(tag, attribut, value,){
  * @param value1 value of the attribut1
  * @param attribut2 name of the attribut2
  * @param value2 value of the attribut2
+ * @param attribut3 value of the attribut3
+ * @param value3 value of the attribut3
  * @param innerHTML the value of the Content
  * @returns {*} the DOM-Element
  */
-function elementWithTowAttributesAndInnerHTML(tag, attribut1, value1,attribut2, value2, innerHTML) {
+function elementWithThreeAttributesAndInnerHTML(tag, attribut1, value1,attribut2, value2, attribut3,value3, innerHTML) {
 	let t = document.createElement(tag);
 	t.setAttribute(attribut1, value1);
 	t.setAttribute(attribut2, value2);
-	t.innerHTML = innerHTML;
-	return t;
-}
-/**
- * This function creates and returns an DOM-Element after given parameters.
- * @param tag Type of the Dom-Element
- * @param attribut1 name of the attribut1
- * @param value1 value of the attribut1
- * @param attribut2 name of the attribut2
- * @param value2 value of the attribut2
- * @param attribut3 name of the attribut3
- * @param value3 value of the attribut3
- * @returns {*} the DOM-Element
- */
-function elementWithThreeAttributes(tag, attribut1, value1,attribut2, value2,attribut3, value3){
-	let t = document.createElement(tag);
-	t.setAttribute(attribut1, value1,);
-	t.setAttribute(attribut2, value2);
 	t.setAttribute(attribut3, value3);
+	t.innerHTML = innerHTML;
 	return t;
 }
 /**
