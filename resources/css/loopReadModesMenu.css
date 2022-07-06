@@ -1,15 +1,15 @@
 /*
- This file is part of the Extension and contains the CCS rules for the LoopReadModes menu bar and buttons.
+ This file is part of the extension and contains the CCS rules for the LoopReadModes menu bar and buttons.
  @author Andreas Kißmehl
  */
 @import url("../../extensions/LoopReadModes/resources/css/fonts/fonts.css");
 
 /** The basic parameters  for the Bar.
-	--main-bg-color: Background-color for the Bar.
-	--main-bg-secondary-color: Background-color for the Bar if :hover or focus is active.
-	--main-height: The basic height of the Bar and the buttons-
-	--iconColor: The Color of the Font in the buttons.
-	--font-size: Zhe font size of the Font in the buttons.
+	--main-bg-color: Background color for the bar.
+	--main-bg-secondary-color: Background color for the bar if :hover or :focus is active.
+	--main-height: The basic height of the bar and the buttons.
+	--iconColor: The color of the font on the buttons.
+	--font-size: The font size on the buttons.
 */
 :root {
 	--main-bg-color: #526ca2;
@@ -22,7 +22,7 @@
 }
 
 /*-------------------------------- classes -------------------------------- */
-/* This are the parameters for the menubar*/
+/* These are the parameters for the menu bar*/
 .rmBtn {
 	background-color: var(--main-bg-color);
 	border: var(--button-border);
@@ -40,20 +40,20 @@
 	font-size: var(--font-size);
 }
 
-/* This are the parameters for the dropdown buttons css pseudo-classes */
+/* These are the parameters for the dropdown buttons */
 .dropdownBtn:hover,
 .dropdownBtn:focus {
 	text-decoration: var(--button-hover);
 }
 
-/* This are the parameters for the buttons css pseudo-classes */
+/* These are the parameters for the buttons css pseudo-classes */
 .rmBtn:hover,
 .rmBtn:focus {
 	background-color: var(--main-bg-secondary-color);
 }
 
 /*-------------------------------- id -------------------------------- */
-/* This are the parameters for the wrapper div of the LoopReadModesBar */
+/* These are the parameters for the wrapper div of the LoopReadModesBar */
 #rmBar{
 	background: var(--main-bg-color);
 	width: 100%;
@@ -62,12 +62,12 @@
 	justify-content: flex-end
 }
 
-/* this is the setting of the width for the Buttons that select the Mode*/
+/* This is the setting of the width for the buttons that select the mode*/
 #rmModes, #rmClose, #rmOpen{
 	width: 100px;
 }
 
-/* this are the setting of scaling buttons */
+/* These are the settings of scaling buttons */
 #rmScale {
 	display: flex;
 	justify-content: center;

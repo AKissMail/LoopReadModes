@@ -1,24 +1,24 @@
 /*
- This file is a mode that it ment to be used in the MediaWiki Extension LoopReadModes.
- It will help dyslexic people to read more comfortable.
+ This file is a mode to be used in the MediaWiki extension LoopReadModes.
+ It will help dyslexics to read more comfortably.
  @author Andreas Kißmehl
  */
 
-/*import for the used Font*/
+/*import for the used font*/
 @import url('fonts/fonts.css');
 
 /** The basic parameters  for the Bar.
-	--main-bg-color: Background color for the LoopReadModes Bar.
-	--main-bg-secondary-color: Background color for the LoopReadModes Bar.
-	--main-height: The height of the Bar. Need to be adjusted if you use lage fonts (28 pt+).
-	--background-color: Background color for the Text area.
+	--main-bg-color: Background color for the LoopReadModes bar.
+	--main-bg-secondary-color: Background color for the LoopReadModes bar.
+	--main-height: The height of the bar. Need to be adjusted if you use large fonts (28 pt+).
+	--background-color: Background color for the text area.
 	--background-color-secondary: Background color for the pseudo-classes and secondary areas.
 	--border-top-color: Color of the top border.
-	--font-color: Color of the Font.
-	--font-color-link: Color of the Links.
-	--font: Setting for the Font.
-	--iconColor: Color setting for the System Icon.
-	--rmBtn-width: The width of the Modes Button. If you see an overflow, increase this number.
+	--font-color: Color of the font.
+	--font-color-link: Color of the links.
+	--font: Setting for the font.
+	--iconColor: Color setting for the system icon.
+	--rmBtn-width: The width of the modes button. If you see an overflow, increase this number.
 */
   :root {
 	--main-bg-color: #edd1b0;
@@ -72,7 +72,7 @@ body,
 	box-shadow: 0 5px 5px -4px var(--border-top-color) !important;
 }
 
-/*setting for the background-color in the search result screen*/
+/*setting for the background color in the search result screen*/
 .mw-search-profile-tabs {
 	background-color: var(--background-color)!important;
 	margin-top: 0!important;
@@ -102,7 +102,7 @@ span.ic,
 
 }
 
-/*------------------------------------------------- Buttons .........-------------------------------------------------*/
+/*------------------------------------------------- Buttons ----------------------------------------------------------*/
 .btn-light.disabled,
 .btn-light[disabled],
 fieldset[disabled] .btn-light,
@@ -138,7 +138,7 @@ fieldset[disabled] .btn-light,
 	color: var(--iconColor)!important;
 }
 
-/*settings for the Spoiler element */
+/*settings for the spoiler element */
 .btn.loopspoiler {
 	border: var(--font-color)!important;
 	color: var(--font-color)!important;
@@ -151,7 +151,7 @@ fieldset[disabled] .btn-light,
 	letter-spacing: var(--font-letter-spacing);
 }
 
-/*settings for the Spoiler element */
+/*settings for the spoiler element */
 .loopspoiler:hover,
 .loopspoiler:focus {
 	text-decoration: var(--font-text-decoration);
@@ -187,7 +187,7 @@ p,
 	font-family: var(--font)!important;
 }
 
-/*color setting for the links*/
+/*color settings for the links*/
 a,
 #main-footer {
 	color: var(--font-color-link)!important;
@@ -206,33 +206,33 @@ caption {
 }
 
 /*------------------------------------------------- loopReadModesBar -------------------------------------------------*/
-/*background-color for the Bar*/
+/*background color for the bar*/
 #rmBar {
 	background: var(--main-bg-color);
 	height: var(--main-height);
 }
 
-/*setting for the button that changes the font-size (A-,A, A+)*/
+/*settings for the button that changes the font size (A-,A, A+)*/
 #rmScale > button {
 	background-color: var(--main-bg-color);;
 	width: var(--main-height);
 	height: var(--main-height);
 }
 
-/*pseudo-class setting for the button that changes the font-size (A-,A, A+) */
+/*pseudo-class setting for the button that changes the font size (A-,A, A+) */
 #rmScale > button:hover,
 #rmScale > button:focus  {
 	background-color: var(--main-bg-secondary-color);
 }
 
 /*------------------------------------------------- Tables -----------------------------------------------------------*/
-/*setting for the Tables*/
+/*setting for the tables*/
 .wikitable > tr > th,
 .wikitable > * > tr > th {
 	background-color: var(--background-color-secondary)!important;
 }
 
-/*setting for the Tables*/
+/*settings for the tables*/
 .wikitable > tr > th,
 .wikitable > tr > td,
 .wikitable > * > tr > th,

@@ -1,53 +1,53 @@
 {
-  "name" : "LoopReadModes",
-  "type" : "other",
-  "author" : [
-    "Andreas Kißmehl"
-  ],
-  "version" : "0.1.0",
-  "url": "https://github.com/AKissMail/mediawiki-skins-Loop-readmode",
-  "description" : "This extension makes Pages in Loop more accessible for users that have special needs",
-  "license-name" : "GPL-3.0",
-  "requires" : {
-    "MediaWiki": ">= 1.35",
-    "extensions": {
-      "Loop": ">=2.1.0"
-    }
-  },
-  "manifest_version" : 2,
-  "MessagesDirs": {
-    "LoopReadModes": [
-      "i18n"
-    ]
-  },
-  "callback" : "LoopReadModes::onExtensionLoad",
-  "AutoloadClasses": {
-    "LoopReadModes": "includes/LoopReadModes.php"
-  },
-  "Hooks" :{
-    "BeforePageDisplay" :
-    [
-      "LoopReadModes::onBeforePageDisplay"
-    ],
-	"SpecialSearchResultsAppend":
-	[
-		"LoopReadModes::onSpecialSearchResultsAppend"
-	]
-  },
-  "ResourceFileModulePaths": {
+	"name" : "LoopReadModes",
+	"type" : "other",
+	"author" : [
+		"Andreas Kißmehl"
+	],
+	"version" : "0.1.0",
+	"url": "https://github.com/AKissMail/mediawiki-skins-Loop-readmode",
+	"description" : "This extension makes Pages in Loop more accessible for users that have special needs",
+	"license-name" : "GPL-3.0",
+	"requires" : {
+		"MediaWiki": ">= 1.35",
+		"extensions": {
+			"Loop": ">=2.1.0"
+		}
+	},
+	"manifest_version" : 2,
+	"MessagesDirs": {
+		"LoopReadModes": [
+			"i18n"
+		]
+	},
+	"callback" : "LoopReadModes::onExtensionLoad",
+	"AutoloadClasses": {
+		"LoopReadModes": "includes/LoopReadModes.php"
+	},
+	"Hooks" :{
+		"BeforePageDisplay" :
+		[
+			"LoopReadModes::onBeforePageDisplay"
+		],
+		"SpecialSearchResultsAppend":
+		[
+			"LoopReadModes::onSpecialSearchResultsAppend"
+		]
+	},
+	"ResourceFileModulePaths": {
 		"localBasePath": ""
 	},
-  "ResourceModules": {
-    "extension.LoopReadModes": {
-      "styles": "/resources/css/loopReadModesMenu.css"
-    },
-    "extension.LoopReadModes.js": {
-      "position": "bottom",
-      "scripts": [
-		  "/resources/js/loopReadModes.js"
-	  ],
-      "messages": [
-      ]
-    }
-  }
+	"ResourceModules": {
+		"extension.LoopReadModes": {
+			"styles": "/resources/css/loopReadModesMenu.css"
+		},
+		"extension.LoopReadModes.js": {
+			"position": "bottom",
+			"scripts": [
+				"/resources/js/loopReadModes.js"
+			],
+			"messages": [
+			]
+		}
+	}
 }

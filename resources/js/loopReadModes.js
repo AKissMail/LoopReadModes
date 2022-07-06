@@ -2,14 +2,14 @@
  * This script puts an additional bar on top of a loop system.
  * @author Andreas Kißmehl
  * @version 1.0
- * @param config Global variable for the Config object after it is fetched from the Server.
- * @param modesURL The URI of the current Stylesheet
- * @param currentMode The Current Style
- * @param textSize The current TextSize
- * @param normalTextSize The normal TextSize (fallback)
- * @param textSizeChange boolean true= a custom TextSize is set
+ * @param config Global variable for the config object after it is fetched from the server
+ * @param modesURL The URI of the current stylesheet
+ * @param currentMode The current style
+ * @param textSize The current text size
+ * @param normalTextSize The normal text size (fallback)
+ * @param textSizeChange boolean true= a custom text size is set
  * @param server URI of the server
- * @param configURL  URI of the Configuration file
+ * @param configURL  URI of the configuration file
  */
 let 	config;
 let 	modeURL;
@@ -21,8 +21,8 @@ const 	server = mw.config.get ( 'wgServer' )+ "/" + mw.config.get ( 'wgScriptPat
 const 	configURL=  server + "/extensions/LoopReadModes/modes/modes.json";
 
 /**
- * That function checks if a Cookie is already set with a preferred style and return that name of the style.
- * If the function fond nothing the sting '' is returned.
+ * This function checks if a cookie is already set with a preferred style and returns the name of the style.
+ * If the function found nothing the string '' is returned.
  * @returns {string} the name of the style
  */
 function getCookie ( cookieName ) {
@@ -42,7 +42,7 @@ function getCookie ( cookieName ) {
 }
 
 /**
- * This function set up the menubar and put it in the dom.
+ * This function sets up the menu bar and inserts it into the DOM.
  */
 function build () {
 	let barWrapper = elementWithOneAttributes ('div', 'id','rmBar' );
@@ -55,7 +55,7 @@ function build () {
 }
 
 /**
- * This function creates a Button in a Div and Set an EventListener.
+ * This function creates a button in a div and sets an EventListener.
  * @returns {*} the div
  */
 function getSelect(){
@@ -68,7 +68,7 @@ function getSelect(){
 
 /**
  * This function checks if a specific button has the ID rmClose or Open.
- * Depending on the case it will add or remove the button's and set a new id.
+ * Depending on the case it will add or remove the button and set a new id.
  */
 function selectDropDown (){
 	let div = document.getElementById ( 'rmModes' );
@@ -81,18 +81,18 @@ function selectDropDown (){
 }
 
 /**
- * This function removes Elements from the DOM with a given id.
- * @param id the id of the Element that will be removed from the Dom.
- */
+* This function removes elements from the DOM with a given ID.
+* @param id the ID of the element that will be removed from the Dom.
+*/
 function removeElementByID ( id ) {
 	document.getElementById ( id ).remove();
 }
 
 /**
- * This function creates a Dropdown out of Buttons.
- * Ths Dropdown is created after the config Objekt what is stored in the config variable.
+ * This function creates a dropdown of buttons.
+ * This dropdown is created after the config object that is stored in the config variable.
  * @param input the config file
- * @returns {*} a html element with the buttons and eventListener for the dropdown
+ * @returns {*} a html element with the buttons and EventListener for the dropdown
  */
 function getModeButtons ( input ){
 	let data = input.modes;
@@ -107,8 +107,8 @@ function getModeButtons ( input ){
 }
 
 /**
- * This function fetch a json file from the Server, save it in the global variable config and calls build.
- * If the JSON file is empty or an Error happens it just calls build() with ['LOOP'] and the bar with it scaling
+ * This function fetches a json file from the server, saves it in the global variable config and calls build().
+ * If the JSON file is empty or an error happens it just calls build() with ['LOOP'] and the bar with its scaling
  * functionality is build.
  * @param url of the config file
  */
@@ -158,10 +158,10 @@ function getScale () {
 }
 
 /**
- * This function takes a Keyword and checks if the keyword appears in the config objekt.
- * If so it takes the URL out of the config objekt and creates link tag with the URL.
- * Before the tag is put in the DOM, it checkt if a custom Style is already in the DOM and remove it.
- * For this reason the id 'modeURL' is used.
+ * This function takes a keyword and checks if the keyword appears in the config object.
+ * If so, it takes the URL from the config object and creates a link tag with the URL.
+ * Before inserting the tag into the DOM, it checks if a custom style already exists in the DOM and removes it.
+ * For this reason the ID 'modeURL' is used.
  * @param modeName the chosen style
  */
 function updateMode ( modeName ) {
@@ -181,7 +181,7 @@ function updateMode ( modeName ) {
 }
 
 /**
- * This function change the font-size of all p, li, th, td, caption tags to a given px number.
+ * This function changes the font size of all p, li, th, td, caption tags to a given px number.
  * The given number is saved in a cookie called 'textSize'.
  * @param size the px size of the p, li, th, caption and td.
  */
@@ -200,7 +200,7 @@ function changeTextSize ( size ) {
 
 	/**
 	 * Inner function to calculate the number of p tags that should be scaled.
-	 * It avoids the scaling it the sides panels.
+	 * It avoids the scaling of the side panels.
 	 * @param length the length of the document.getElementsByTagName ( 'p' ) result.
 	 * @returns {number} the number of the relevant p tags.
 	 */
@@ -215,10 +215,10 @@ function changeTextSize ( size ) {
 }
 
 /**
- * This function is a for loop that goes over an Array of html elements and set an inline Style 'font-size'.
- * If an empty Array is given as a parameter it will do nothing and if a single element is given as a parameter it will set the inline Style.
+ * This function is a for loop that goes over an array of html elements and set an inline style 'font-size'.
+ * If an empty array is given as a parameter it will do nothing and if a single element is given as a parameter it will set the inline style.
  * @param array input array with the html elements
- * @param workLength the part of the array what should be change
+ * @param workLength the part of the array that should be change
  * @param size size of the font
  */
 function loop ( array, workLength, size ) {
@@ -232,7 +232,7 @@ function loop ( array, workLength, size ) {
 }
 
 /**
- * This function creates a dom element with one attributes and values.
+ * This function creates a DOM element with one attribute and values.
  * @param tag the kind of the tag
  * @param attribut name of the attribut
  * @param value value of the attribut
@@ -245,7 +245,7 @@ function elementWithOneAttributes ( tag, attribut, value ) {
 }
 
 /**
- * This function creates and returns an DOM-Element after given parameters and puts content inside.
+ * This function creates and returns an DOM element after given parameters and puts content inside.
  * @param tag Type of the Dom-Element
  * @param attribut1 name of the attribut1
  * @param value1 value of the attribut1
@@ -266,7 +266,7 @@ function elementWithThreeAttributesAndInnerHTML ( tag, attribut1, value1,attribu
 }
 
 /**
- * This function creates and returns an DOM-Element after given parameters.
+ * This function creates and returns an DOM element after given parameters.
  * @param tag Type of the Dom-Element
  * @param attribut1 name of the attribut1
  * @param value1 value of the attribut1
@@ -288,7 +288,7 @@ function elementWithFourAttributes ( tag, attribut1, value1,attribut2, value2,at
 }
 
 /**
- * That is the first function how get called after the file is fetch in the Client.
+ * This is the first function that is called after the file is fetched in the client.
  */
 (()=>{
 	fetchModes ( configURL );
