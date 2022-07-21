@@ -10,7 +10,7 @@
 		{
 			"name": "Dyslexia",
 			"url": "/extensions/LoopReadModes/modes/css/lrs.css",
-			"textSize": 29,
+			"textSize": 21,
 			"preViewBackground": "#edd1b0",
 			"preView": "#000"
 		},
