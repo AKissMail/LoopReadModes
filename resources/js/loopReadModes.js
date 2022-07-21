@@ -49,7 +49,6 @@ function build () {
 	( currentMode )? updateMode ( currentMode ):false;
 	( textSize ) ? changeTextSize ( textSize ):false;
 	( !textSize ) ? textSize = 16 :false;
-
 	let barWrapper = elementWithOneAttributes ('div', 'id','rmBar' );
 	barWrapper.append ( getScale () );
 	barWrapper.append ( getSelect () );
