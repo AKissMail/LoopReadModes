@@ -8,18 +8,18 @@
 			"preView": "#fff"
 		},
 		{
-			"name": "Dyslexia",
+			"name": "Dyslexia2",
 			"url": "/extensions/LoopReadModes/modes/css/lrs.css",
 			"textSize": 21,
 			"preViewBackground": "#edd1b0",
 			"preView": "#000"
 		},
 		{
-			"name": "Dracula",
+			"name": "Dyslexia1",
 			"url": "/extensions/LoopReadModes/modes/css/lrs.css",
-			"textSize": 29,
-			"preViewBackground": "#212121",
-			"preView": "#adadad"
+			"textSize": 26,
+			"preViewBackground": "#edd1b0",
+			"preView": "#000"
 		}
 	]
 }
